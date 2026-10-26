@@ -13,4 +13,3 @@ This folder is a design review artifact, not the Next/Payload production app.
 - Original AI PNGs, Commons JPEGs and earlier screenshots are retained for provenance, not fetched by the current layout. AI scenes remain conceptual and never establish actual product features/events.
 
 Production migration still requires approved Next/React/Payload/Postgres versions, strict TS, localized CMS fields/blocks and access/lifecycle/download tests. Copy extraction here closes draft hardcoding; it does not implement the CMS.
-

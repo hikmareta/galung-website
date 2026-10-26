@@ -2,7 +2,7 @@
 
 ## Gate and scope
 
-Local Phase 02 foundation: acceptance checks below pass after remediation. This
+**Gate: PASS for the local Phase 02 foundation.** Acceptance checks below pass after remediation. This
 report supersedes the original implementation PASS and subsequent PARTIAL review.
 Git delivery and hosted CI observations are recorded separately below; no production
 readiness, WCAG certification or deployment is claimed. Phase 03 has not started.
@@ -20,7 +20,7 @@ and user-authorized initial commit/push. Existing product and legal TBDs are unc
 | R01 password reset bypass | Fixed. Shared policy in src/access/password.ts; beforeOperation validates reset, beforeChange validates ordinary writes. Tests reject short create/update/reset; valid 16-character reset succeeds; expired/replayed token and inactive account fail. HTTP reset is also exercised |
 | R02 populated database breaks tests | Fixed. Each suite creates a fresh randomly named DB; dev users are never cleared. Empty and initialized admin screens are tested separately; fresh server/temporary port prevents stale-server evidence |
 | R03 timeout mistaken for rejection | Fixed. Exact exit code, no process error/signal, expected refusal text and unchanged count required. Unit cases reject timeout/null/signal/launch errors. No silent bootstrap skip |
-| R04 uncommitted lockfile/baseline | User authorized commit and push, supplied local-only Git author identity; baseline and lockfile prepared for reviewed delivery. See delivery status below |
+| R04 uncommitted lockfile/baseline | Fixed by initial commit 5962ae8, including baseline and pnpm lockfile. User-supplied author identity is local to this repo. Remote verification below |
 | R05 moderate esbuild advisory | Fixed by scoped verified esbuild 0.25.12 override; migrations/rollback/reapply pass; full audit reports no known vulnerabilities |
 | R06 later production controls | Explicitly assessed and assigned to original Phase 04/07/08 gates in PHASE-02-SECURITY-BOUNDARY.md. No public exposure or false implementation claim |
 | R07 unsupported lint / adapter shutdown / operational test gaps | ESLint 10-compatible rule stack installed; adapter lifecycle patch committed via pnpm; no forced-success exit. Migration rollback, actual pg_dump/restore and clean pool shutdown verified. Hosted CI status reported separately |
@@ -83,6 +83,14 @@ overrideAccess in test calls; both were corrected before final checks.
 | Existing preview generator tests under PowerShell 7 | 5 pass |
 | Secret-pattern review | No private-key/PAT/AWS-key match in intended source files; .env, .tools, node_modules and outputs excluded |
 | Git identity / remote inspection | Local identity set from user instruction; origin is the authorized hikmareta/galung-website repository |
+| Existing-development-admin sentinel proof | Both integration and browser suites pass with the sentinel unchanged; fixture removed afterward. Final dev user count 0 and no galung_test databases remain |
+
+Initial staging also exposed trailing whitespace in archived text/notices and
+generated migration SQL, despite the code formatter passing (those archives and
+generated files are intentionally outside its scope). A follow-up normalizes only
+that whitespace; license wording, reference imagery and SQL behavior are preserved.
+The final diff whitespace check passes. No successful-check claim is inferred from
+an earlier command batch continuing after a failed whitespace check.
 
 The dev-database sentinel proof runs integration/browser suites while a disposable
 admin exists in the development DB, verifies it is unchanged, then removes it.
@@ -110,8 +118,9 @@ The user explicitly authorized initial commit and push and supplied the Git auth
 The intended baseline includes original planning/reference assets, application,
 tests, patch, documentation and lockfile. Secrets/local runtimes/test output are
 excluded. Remote: https://github.com/hikmareta/galung-website.git.
-Final commit/push and hosted workflow results are recorded after execution; this
-section does not treat a planned push or queued workflow as completed verification.
+Initial commit: 5962ae8, authored with the user-provided identity, includes the
+lockfile and complete reviewed baseline. Push and hosted workflow observations
+will be recorded after execution; a queued workflow is not treated as a pass.
 
 ## Next scope
 

@@ -1,6 +1,6 @@
 # Galung Official Website & CMS — Development Pack v1.2
 
-**Baseline:** 24 October 2026. **Domain:** `galung.id`. **Status:** Phase 02 local foundation remediated; production pending.
+**Baseline:** 24 October 2026. **Domain:** `galung.id`. **Status:** Phase 02 local foundation PASS after remediation; production pending.
 
 ## Current progress
 
@@ -40,6 +40,3 @@ Build a professional, bilingual corporate/product site for **Galung**, a music s
 6. Review output, run checks, commit, then advance to the next phase.
 
 **Important:** Follow the Phase 02 runbook to configure local secrets, PostgreSQL, migrations and the first administrator. Hosting, production brand assets, contact/legal data and installer variants remain TBD. Public routes currently contain clearly labeled foundation samples.
-
-
-

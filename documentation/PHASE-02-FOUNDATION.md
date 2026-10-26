@@ -158,4 +158,4 @@ noindex in this foundation; the unused SITE_INDEXABLE example setting was remove
 Canonical/hreflang/sitemap and selective production indexing belong to Phase 05.
 
 Results, gate status, remaining risks and complete changed-file inventory are in
-`PHASE-02-EVALUATION.md`.
+`PHASE-02-CLOSURE.md`; earlier reports are historical.

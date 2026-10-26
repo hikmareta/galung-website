@@ -27,4 +27,3 @@ manifest['largestImageAndFontSetBytes'] = manifest['largestImageSetBytes'] + man
 manifest['archivedSourceSetBytes'] = sum(i['sourceBytes'] for i in manifest['images']) + sum(f.stat().st_size for f in (root / 'assets' / 'fonts').glob('*.ttf'))
 (out / 'manifest.json').write_text(json.dumps(manifest, indent=2) + '\n', encoding='utf-8')
 print(json.dumps({'largestImageSetBytes': manifest['largestImageSetBytes'], 'allVariantBytes': sum(v['bytes'] for i in manifest['images'] for v in i['variants'])}))
-
