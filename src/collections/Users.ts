@@ -1,3 +1,5 @@
+import { editorialUser } from "../access/editorial";
+import { auditChange, auditDelete } from "../hooks/editorial";
 import type { CollectionConfig } from "payload";
 import { Forbidden } from "payload";
 import { adminOnly, isActiveAdmin } from "../access/admin";
@@ -16,14 +18,18 @@ export const Users: CollectionConfig = {
     },
   },
   access: {
-    admin: ({ req }) => isActiveAdmin(req.user),
+    admin: ({ req }) => editorialUser(req.user),
     create: adminOnly,
-    read: adminOnly,
+    read: ({ req }) =>
+      isActiveAdmin(req.user) ||
+      (editorialUser(req.user) ? { id: { equals: req.user!.id } } : false),
     update: adminOnly,
     delete: adminOnly,
     unlock: adminOnly,
   },
   hooks: {
+    afterChange: [auditChange],
+    afterDelete: [auditDelete],
     beforeOperation: [
       ({ operation, args }) => {
         // Payload resetPassword writes directly, bypassing beforeChange.
@@ -48,7 +54,7 @@ export const Users: CollectionConfig = {
     ],
     beforeLogin: [
       ({ user }) => {
-        if (!isActiveAdmin({ ...user, collection: "users" }))
+        if (!editorialUser({ ...user, collection: "users" }))
           throw new Forbidden();
       },
     ],
@@ -59,8 +65,8 @@ export const Users: CollectionConfig = {
       name: "role",
       type: "select",
       required: true,
-      defaultValue: "super-admin",
-      options: [{ label: "Super Admin", value: "super-admin" }],
+      defaultValue: "editor",
+      options: ["editor", "publisher", "super-admin"],
       access: { update: ({ req }) => isActiveAdmin(req.user) },
     },
     {

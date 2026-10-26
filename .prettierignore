@@ -4,4 +4,4 @@ src/migrations/
 src/app/(payload)/admin/importMap.js
 next-env.d.ts
 references/
-content/
+/content/

@@ -1,3 +1,5 @@
+import { rm } from "node:fs/promises";
+import path from "node:path";
 import { Client } from "pg";
 import { randomBytes } from "node:crypto";
 import { spawn } from "node:child_process";
@@ -22,6 +24,15 @@ if (
   );
 }
 const name = `galung_test_${kind}_${randomBytes(8).toString("hex")}`;
+const mediaRoot = path.resolve("media");
+const testMedia = path.resolve(mediaRoot, name);
+if (
+  path.dirname(testMedia) !== mediaRoot ||
+  !/^galung_test_(integration|e2e|database)_[a-f0-9]{16}$/.test(
+    path.basename(testMedia),
+  )
+)
+  throw new Error("Unsafe test media cleanup path");
 const adminURL = new URL(base);
 adminURL.pathname = "/postgres";
 const admin = new Client({ connectionString: adminURL.href });
@@ -141,8 +152,16 @@ try {
   const payload = ["--import", "tsx", "node_modules/payload/bin.js"];
   await run([...payload, "migrate"]);
   if (kind === "integration") {
-    await run(["--import", "tsx", "tests/integration/auth.ts"]);
-    await run(["--import", "tsx", "tests/integration/auth-regressions.ts"]);
+    if (process.argv[3] === "phase04-review") {
+      await run(["--import", "tsx", "tests/integration/phase04-review.ts"]);
+    } else {
+      if (process.argv[3] !== "editorial") {
+        await run(["--import", "tsx", "tests/integration/auth.ts"]);
+        await run(["--import", "tsx", "tests/integration/auth-regressions.ts"]);
+      }
+      await run(["--import", "tsx", "tests/integration/editorial.ts"]);
+      await run(["--import", "tsx", "tests/integration/phase04-review.ts"]);
+    }
   }
   if (kind === "e2e") {
     const server = createServer();
@@ -184,7 +203,21 @@ try {
     await backupRehearsal();
   }
 } finally {
-  if (created) await admin.query(`DROP DATABASE "${name}" WITH (FORCE)`);
+  if (created) {
+    // Only this runner-created, random database is isolated and removed.
+    await admin.query(`ALTER DATABASE "${name}" WITH ALLOW_CONNECTIONS false`);
+    await admin.query(
+      "SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE datname = $1 AND pid <> pg_backend_pid()",
+      [name],
+    );
+    await admin.query(`DROP DATABASE "${name}" WITH (FORCE)`);
+  }
   await admin.end();
+  await rm(testMedia, {
+    recursive: true,
+    force: true,
+    maxRetries: 3,
+    retryDelay: 100,
+  });
   console.log(`Removed isolated ${kind} database`);
 }

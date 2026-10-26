@@ -1,0 +1,39 @@
+@font-face {
+  font-family: Poppins;
+  src: url("/fonts/poppins-600-latin.woff2") format("woff2");
+  font-weight: 600;
+  font-display: swap;
+}
+@font-face {
+  font-family: Poppins;
+  src: url("/fonts/poppins-700-latin.woff2") format("woff2");
+  font-weight: 700;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Nunito Sans";
+  src: url("/fonts/nunito-sans-400-700-latin.woff2") format("woff2");
+  font-weight: 400 700;
+  font-display: swap;
+}
+:root {
+  --color-primary: #073e32;
+  --color-secondary: #0b5c48;
+  --color-accent: #d9ac5e;
+  --color-bg: #faf7f0;
+  --color-text: #242820;
+  --color-white: #fff;
+  --color-muted: #536158;
+  --color-border: #d9dfd7;
+  --space-1: 0.5rem;
+  --space-2: 1rem;
+  --space-3: 1.5rem;
+  --space-4: 2rem;
+  --space-6: 3rem;
+  --space-8: 4rem;
+  --radius-card: 1.5rem;
+  --radius-pill: 99rem;
+  --container: 76rem;
+  --font-heading: Poppins, sans-serif;
+  --font-body: "Nunito Sans", sans-serif;
+}

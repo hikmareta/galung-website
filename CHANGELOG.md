@@ -1,5 +1,13 @@
 # Changelog
 
+## 2026-10-26 — Phase 04 remediation and closure
+
+- Closed P04-R1–R5: deny file replacement before file effects, preserve original hashes, require approved bilingual media before publication, protect exact current/version references and retain immutable audit actor snapshots after staff deletion.
+- Completed required CMS schema fields, specialized blocks, safe localized rich text and private inactive operational models; retained one Galung product, no invented legal data or automatic translations.
+- Unified preview/public content rendering, added intrinsic image sizes and explicit accessible ordering controls, preserved locale values during validation, and verified warmed published-cache invalidation.
+- Added native editor/publisher image-selection, approval, document-lock takeover and publication tests at 375/1280 using a visible original synthetic image. Final local results: 16 unit tests, full integration/regressions, migration rollback/reapply/restore, 28 browser tests, lint/types/format/build pass; dependency audit reports no known vulnerabilities.
+- Applied tested closure migrations to the working development DB after private backup. Updated schema map, evaluation/closure, historical review notices and current gate status. No deployment, commit, push, Phase 05 activation or commercial/customer features.
+
 ## 2026-10-26 — Phase 02 remediation and closure
 
 - Unified password policy across create/update/reset, with Local API and HTTP regression coverage for short passwords, valid/expired/replayed tokens and inactive accounts.
@@ -42,3 +50,27 @@
 - Added 12 responsive WebP derivatives, local Latin WOFF2 fonts, asset hashes and repeatable optimization. Largest image/font set reduced from 7,177,155 to 568,414 bytes (92.08%); original assets/rights records retained.
 - Added allowlisted local server error/method handling, CSP and consistent noindex/error headers. Native Node regression suite: 10 passed. PowerShell generator checks: 5 passed.
 - Initialized local Git and .gitignore; no commit/remote or application scaffold created. Added local preview guide and remediation evaluation. Production CMS/RBAC/locales/releases/legal content remain pending under the roadmap.
+
+## 2026-10-26 — Phase 03 design system
+- Added self-hosted approved typography, design tokens, responsive shell, buttons/cards, disclosure menu, language switcher and labeled ID/EN component examples.
+- Added responsive/keyboard regression coverage and visual review artifacts; retained noindex and existing server access controls. See PHASE-03-EVALUATION.md for actual results.
+
+## 2026-10-26 — Fresh Phase 03 evaluation
+- Reviewed actual tracked/untracked source, configuration, browser coverage and visual captures; retained PARTIAL gate.
+- Identified lost keyboard locale coverage, incomplete doc 05 visual/admin acceptance, missing long-copy stress evidence and unused spacing tokens.
+- Reran format/lint/types/unit/browser checks; distinguished fresh checks from retained build/database/integration results in PHASE-03-REVIEW.md. No product implementation or later phase added.
+
+## 2026-10-26 — Phase 03 remediation and closure
+- Closed P03-R1–R6: bounded async bootstrap test process, restored keyboard locale round trip, long-copy/200% text coverage, shared consumed spacing tokens, localized sample metadata/swatches and removal of unused font.
+- Added conceptual responsive hero/value/media/gallery examples and related Payload login/dashboard/table/edit styling, retaining server permissions and noindex.
+- Fixed image-card height overlap found in visual review and 640px enlarged-text clipping found by regression tests; final browser suite passes 26/26, unit suite 8/8, integration/database/build checks and dependency audit pass.
+- Updated current phase docs and retained earlier failures as historical evidence. No Phase 04, commercial feature, deployment, commit or push performed.
+
+## Phase 04 — 26 October 2026
+- Added editorial schemas/globals, shared localized blocks, editor/publisher access, drafts/version history, authenticated preview, published homepage content, audit hooks and media safeguards.
+- Added permission/localization/reordering regression coverage and reversible CMS migration; see documentation/PHASE-04-CMS.md and PHASE-04-EVALUATION.md for actual gate evidence and remaining limits.
+- Closed reproduced locale corruption during publish, PostgreSQL enum/rollback generation issues and browser fixture cache isolation. Final checks: 11 unit tests, complete integration suite, 27 browser tests, migration/restore and build pass locally. Applied migration to local working DB after backup; no deployment.
+
+## Phase 04 fresh review — 26 October 2026
+- Reclassified gate as PARTIAL; added isolated adversarial probes reproducing two HIGH media defects and two MEDIUM localization/audit defects. Documented schema-contract gaps and exact remediation requirements in documentation/PHASE-04-REVIEW.md.
+- Preserved prior passing test evidence as historical; corrected current README/roadmap/evaluation status. No runtime fixes, later phase or commercial features added.

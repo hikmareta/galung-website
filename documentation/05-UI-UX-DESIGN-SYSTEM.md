@@ -52,3 +52,11 @@ Assets hero/laptop/community di references/content-preview/assets/*-generated-v2
 ## Remediasi pratinjau — 25 Oktober 2026
 
 CSS aktif berada di references/content-preview/styles.css. Heading hero pada layar sempit memakai clamp(2rem,12vw,2.9375rem) dan overflow-wrap:anywhere; kelompok benefit mempunyai H2 sr-only sebelum H3. UI/alt/metadata draf disimpan di content/main-copy.id.json (83 key UI hasil ekstraksi; tidak menciptakan terjemahan EN). Gambar aktif adalah 12 varian WebP responsif, dengan srcset/sizes; PNG asli tetap arsip. Ukuran set resolusi terbesar tiga gambar + empat WOFF2 adalah 568.414 byte, dibanding 7.177.155 byte sebelumnya. Ini pengurangan berkas sumber, bukan hasil Core Web Vitals. Lihat PREVIEW-REMEDIATION-EVALUATION.md untuk bukti dan batas pengujian.
+
+## Phase 03 implementation — 26 October 2026
+See PHASE-03-DESIGN-SYSTEM.md for implemented tokens, components and responsive rules. /id and /en remain explicitly unreviewed noindex design samples; navigation targets sample sections until Phase 05. Visual admin branding is implemented in Phase 03; CMS-editable branding/navigation remains Phase 04.
+
+## Phase 03 remediation contract — 26 October 2026
+Current shared tokens and fonts live in src/styles/tokens.css and are consumed by public and admin styles. Public specimens include conceptual photographic hero with overlay, value bar, media/editorial cards and gallery. Admin proof uses actual existing login/dashboard/user table/edit screens. Responsive grids adapt by minimum content width rather than forcing three narrow columns; long text and 200% root text with text-spacing overrides are regression-tested. See PHASE-03-CLOSURE.md for exact checks and evidence.
+
+Phase 03 demonstrates visual primitives and the existing admin shell. Collections/globals, media selector, draft/preview/publish bar, localized editorial panels and section ordering remain Phase 04 per the roadmap; full CMS-driven public pages and truthful approved content remain Phase 05. No requirement is represented as completed before that functionality exists. Font runtime serves Poppins 600/700 and Nunito Sans 400–700 only; unused Poppins 400 stays in the archived reference, not public/. New localized sample labels and metadata remain unreviewed sample copy.

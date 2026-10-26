@@ -1,0 +1,95 @@
+@import "./tokens.css";
+/* Payload's own layers, dark palette, field states and semantics stay intact. */
+:root {
+  --font-body: "Nunito Sans", sans-serif;
+}
+html[data-theme="light"] {
+  --theme-bg: var(--color-bg);
+  --theme-text: var(--color-text);
+  --theme-input-bg: var(--color-white);
+  --accessibility-outline: 3px solid var(--color-secondary);
+}
+h1,
+h2,
+h3,
+.galung-admin-brand {
+  font-family: var(--font-heading);
+}
+.galung-admin-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-weight: 600;
+  font-size: 1.75rem;
+  line-height: 1.4;
+}
+.galung-admin-brand small {
+  font: 600 1rem var(--font-body);
+}
+.galung-admin-brand > span,
+.galung-admin-icon {
+  color: var(--color-secondary);
+  border-bottom: 3px solid var(--color-accent);
+}
+.galung-admin-icon {
+  font-size: 1.75rem;
+  line-height: 1.4;
+}
+html[data-theme="dark"] :is(.galung-admin-brand > span, .galung-admin-icon) {
+  color: var(--color-accent);
+}
+html[data-theme="light"] .btn--style-primary:not(.btn--disabled) {
+  --bg-color: var(--color-primary);
+  --color: var(--color-bg);
+  --hover-bg: var(--color-secondary);
+  --hover-color: var(--color-white);
+}
+html[data-theme="light"] .nav {
+  border-inline-end: 1px solid var(--color-border);
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+    animation: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+.cms-section-order {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+.cms-section-order__buttons {
+  display: inline-flex;
+  gap: 0.375rem;
+}
+.cms-section-order button {
+  min-width: 44px;
+  min-height: 44px;
+  border: 1px solid var(--color-border);
+  border-radius: 0.5rem;
+  background: var(--color-primary);
+  color: var(--color-white);
+  cursor: pointer;
+  font: inherit;
+}
+.cms-section-order button:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+.cms-section-order button:focus-visible {
+  outline: 3px solid var(--color-text);
+  outline-offset: 3px;
+}
+.cms-section-order__announcement {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}

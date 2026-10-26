@@ -1,8 +1,8 @@
 import assert from "node:assert/strict";
-import type { SpawnSyncReturns } from "node:child_process";
+import type { ProcessResult } from "./run-process.ts";
 
 export function assertProcessResult(
-  result: SpawnSyncReturns<string>,
+  result: ProcessResult,
   expected: number,
   message?: string,
 ): void {

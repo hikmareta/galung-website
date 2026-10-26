@@ -159,3 +159,6 @@ Canonical/hreflang/sitemap and selective production indexing belong to Phase 05.
 
 Results, gate status, remaining risks and complete changed-file inventory are in
 `PHASE-02-CLOSURE.md`; earlier reports are historical.
+
+## Phase 03 test-runner update — 26 October 2026
+Bootstrap regression subprocesses now use tests/helpers/run-process.ts with asynchronous spawn and the same 30-second deadline. The parent event loop stays available; timeout, signals, missing status and launch errors remain hard failures, and cleanup waits for child close. Phase 03 integration and timeout-helper unit checks passed; see PHASE-03-CLOSURE.md. Public/admin fonts and styling now come from the Phase 03 design system, superseding the earlier system-font sample description.

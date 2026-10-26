@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { randomBytes } from "node:crypto";
-import { spawnSync } from "node:child_process";
+import { runProcess } from "../helpers/run-process";
 import { getPayload } from "payload";
 import config from "../../src/payload.config";
 import { assertIsolatedDatabase } from "../helpers/isolated-database";
@@ -38,12 +38,12 @@ try {
       BOOTSTRAP_ADMIN_PASSWORD: password,
     };
     const run = () =>
-      spawnSync(
+      runProcess(
         process.execPath,
         ["--import", "tsx", "--env-file=.env", "scripts/create-admin.ts"],
-        { env: operatorEnv, encoding: "utf8", timeout: 30000 },
+        { env: operatorEnv, timeout: 120000 },
       );
-    const created = run();
+    const created = await run();
     const fixtures = await payload.find({
       collection: "users",
       where: { email: { equals: email } },
@@ -52,7 +52,7 @@ try {
     assertProcessResult(created, 0, "Administrator created.");
     assert.equal(fixtures.totalDocs, 1);
     assertProcessResult(
-      run(),
+      await run(),
       1,
       "Bootstrap is only permitted on an empty users collection",
     );

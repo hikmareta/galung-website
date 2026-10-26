@@ -1,12 +1,14 @@
 # Galung Official Website & CMS — Development Pack v1.2
 
-**Baseline:** 24 October 2026. **Domain:** `galung.id`. **Status:** Phase 02 local foundation PASS after remediation; production pending.
+**Baseline:** 24 October 2026. **Domain:** `galung.id`. **Status:** Phase 04 locally closed — PASS after remediation and reevaluation. See [closure evidence](documentation/PHASE-04-CLOSURE.md). Production pending; Phase 05 not started.
 
 ## Current progress
 
 Phase 01 requirements/reference audit is approved. Authorized content, visual and typography previews remain under `references/content-preview/`. Phase 02 adds the Next/Payload/PostgreSQL foundation. See [local setup and architecture](documentation/PHASE-02-FOUNDATION.md) and [Phase 02 evaluation](documentation/PHASE-02-EVALUATION.md) for actual verification and gate status. This is not a deployed or production-ready site.
 
-The [Phase 02 closure report](documentation/PHASE-02-CLOSURE.md) supersedes the historical PARTIAL review and records regression evidence, isolated test databases, dependency fixes and Git delivery. Phase 03 has not started.
+The [Phase 02 closure report](documentation/PHASE-02-CLOSURE.md) supersedes the historical PARTIAL review and records regression evidence, isolated test databases, dependency fixes and Git delivery. Phase 03 design-system samples are implemented; see [design-system report](documentation/PHASE-03-DESIGN-SYSTEM.md) and [evaluation](documentation/PHASE-03-EVALUATION.md) for historical evidence. The [Phase 03 closure](documentation/PHASE-03-CLOSURE.md) records current passing checks and closes the six review findings.
+
+Phase 04 CMS schemas, editorial roles, shared ID/EN blocks, media safeguards, drafts/preview/publication, cache invalidation and durable audit attribution are implemented. All five review findings are closed with 16 unit tests, complete integration/regression and migration/restore checks, and 28 browser tests passing locally. Tested migrations are applied to the backed-up local working database. See [closure/evaluation](documentation/PHASE-04-CLOSURE.md) and the [current schema map/editorial runbook](documentation/PHASE-04-SCHEMA-MAP.md). No Phase 05 activation or deployment is implied.
 
 ## Goal
 Build a professional, bilingual corporate/product site for **Galung**, a music software product with an Angklung, visual-music and inclusive-learning focus, accompanied by a secure editorial CMS. This is a **new website repository**, separate from the Galung desktop application and licensing system.

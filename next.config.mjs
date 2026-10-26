@@ -13,7 +13,7 @@ export default withPayload({
           { key: "X-Robots-Tag", value: "noindex, nofollow" },
         ],
       },
-      ...["/admin/:path*", "/api/:path*"].map((source) => ({
+      ...["/admin/:path*", "/api/:path*", "/preview/:path*"].map((source) => ({
         source,
         headers: [{ key: "Cache-Control", value: "private, no-store" }],
       })),

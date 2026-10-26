@@ -68,6 +68,18 @@ export interface Config {
   blocks: {};
   collections: {
     users: User;
+    pages: Page;
+    posts: Post;
+    portfolioProjects: PortfolioProject;
+    products: Product;
+    postCategories: PostCategory;
+    portfolioCategories: PortfolioCategory;
+    media: Media;
+    auditEvents: AuditEvent;
+    softwareReleases: SoftwareRelease;
+    releaseAssets: ReleaseAsset;
+    contactSubmissions: ContactSubmission;
+    downloadEvents: DownloadEvent;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -76,6 +88,18 @@ export interface Config {
   collectionsJoins: {};
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
+    pages: PagesSelect<false> | PagesSelect<true>;
+    posts: PostsSelect<false> | PostsSelect<true>;
+    portfolioProjects: PortfolioProjectsSelect<false> | PortfolioProjectsSelect<true>;
+    products: ProductsSelect<false> | ProductsSelect<true>;
+    postCategories: PostCategoriesSelect<false> | PostCategoriesSelect<true>;
+    portfolioCategories: PortfolioCategoriesSelect<false> | PortfolioCategoriesSelect<true>;
+    media: MediaSelect<false> | MediaSelect<true>;
+    auditEvents: AuditEventsSelect<false> | AuditEventsSelect<true>;
+    softwareReleases: SoftwareReleasesSelect<false> | SoftwareReleasesSelect<true>;
+    releaseAssets: ReleaseAssetsSelect<false> | ReleaseAssetsSelect<true>;
+    contactSubmissions: ContactSubmissionsSelect<false> | ContactSubmissionsSelect<true>;
+    downloadEvents: DownloadEventsSelect<false> | DownloadEventsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -85,8 +109,20 @@ export interface Config {
     defaultIDType: number;
   };
   fallbackLocale: ('false' | 'none' | 'null') | false | null | ('id' | 'en') | ('id' | 'en')[];
-  globals: {};
-  globalsSelect: {};
+  globals: {
+    siteSettings: SiteSetting;
+    companyProfile: CompanyProfile;
+    headerNavigation: HeaderNavigation;
+    footerNavigation: FooterNavigation;
+    contactSettings: ContactSetting;
+  };
+  globalsSelect: {
+    siteSettings: SiteSettingsSelect<false> | SiteSettingsSelect<true>;
+    companyProfile: CompanyProfileSelect<false> | CompanyProfileSelect<true>;
+    headerNavigation: HeaderNavigationSelect<false> | HeaderNavigationSelect<true>;
+    footerNavigation: FooterNavigationSelect<false> | FooterNavigationSelect<true>;
+    contactSettings: ContactSettingsSelect<false> | ContactSettingsSelect<true>;
+  };
   locale: 'id' | 'en';
   widgets: {
     collections: CollectionsWidget;
@@ -122,7 +158,7 @@ export interface UserAuthOperations {
 export interface User {
   id: number;
   name: string;
-  role: 'super-admin';
+  role: 'editor' | 'publisher' | 'super-admin';
   active: boolean;
   updatedAt: string;
   createdAt: string;
@@ -143,6 +179,1606 @@ export interface User {
     | null;
   password?: string | null;
   collection: 'users';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "pages".
+ */
+export interface Page {
+  id: number;
+  key: string;
+  title: string;
+  slug: string;
+  /**
+   * Publisher must explicitly review both translations; shared block order publishes together.
+   */
+  reviewedLocales?: ('id' | 'en')[] | null;
+  excerpt?: string | null;
+  heroMedia?: (number | null) | Media;
+  layout?:
+    | (
+        | {
+            enabled?: boolean | null;
+            variant?: ('light' | 'forest') | null;
+            headline?: string | null;
+            body?: string | null;
+            media?: (number | null) | Media;
+            items?:
+              | {
+                  title: string;
+                  body?: string | null;
+                  media?: (number | null) | Media;
+                  id?: string | null;
+                }[]
+              | null;
+            link?: string | null;
+            linkLabel?: string | null;
+            secondaryLink?: string | null;
+            secondaryLinkLabel?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'hero';
+          }
+        | {
+            enabled?: boolean | null;
+            variant?: ('light' | 'forest') | null;
+            headline?: string | null;
+            body?: string | null;
+            media?: (number | null) | Media;
+            items?:
+              | {
+                  title: string;
+                  body?: string | null;
+                  media?: (number | null) | Media;
+                  id?: string | null;
+                }[]
+              | null;
+            link?: string | null;
+            linkLabel?: string | null;
+            content?: {
+              root: {
+                type: string;
+                children: {
+                  type: any;
+                  version: number;
+                  [k: string]: unknown;
+                }[];
+                direction: ('ltr' | 'rtl') | null;
+                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                indent: number;
+                version: number;
+              };
+              [k: string]: unknown;
+            } | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'richText';
+          }
+        | {
+            enabled?: boolean | null;
+            variant?: ('light' | 'forest') | null;
+            headline?: string | null;
+            body?: string | null;
+            media?: (number | null) | Media;
+            items?:
+              | {
+                  title: string;
+                  body?: string | null;
+                  media?: (number | null) | Media;
+                  id?: string | null;
+                }[]
+              | null;
+            link?: string | null;
+            linkLabel?: string | null;
+            imagePosition?: ('left' | 'right') | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'imageText';
+          }
+        | {
+            enabled?: boolean | null;
+            variant?: ('light' | 'forest') | null;
+            headline?: string | null;
+            body?: string | null;
+            media?: (number | null) | Media;
+            items?:
+              | {
+                  title: string;
+                  body?: string | null;
+                  media?: (number | null) | Media;
+                  id?: string | null;
+                }[]
+              | null;
+            link?: string | null;
+            linkLabel?: string | null;
+            columns?: ('2' | '3') | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'featureGrid';
+          }
+        | {
+            enabled?: boolean | null;
+            variant?: ('light' | 'forest') | null;
+            headline?: string | null;
+            body?: string | null;
+            media?: (number | null) | Media;
+            items?:
+              | {
+                  title: string;
+                  body?: string | null;
+                  media?: (number | null) | Media;
+                  id?: string | null;
+                }[]
+              | null;
+            link?: string | null;
+            linkLabel?: string | null;
+            gallery?:
+              | {
+                  image: number | Media;
+                  caption?: string | null;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'mediaShowcase';
+          }
+        | {
+            enabled?: boolean | null;
+            variant?: ('light' | 'forest') | null;
+            headline?: string | null;
+            body?: string | null;
+            media?: (number | null) | Media;
+            items?:
+              | {
+                  title: string;
+                  body?: string | null;
+                  media?: (number | null) | Media;
+                  id?: string | null;
+                }[]
+              | null;
+            link?: string | null;
+            linkLabel?: string | null;
+            statistics?:
+              | {
+                  value: string;
+                  label: string;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'stats';
+          }
+        | {
+            enabled?: boolean | null;
+            variant?: ('light' | 'forest') | null;
+            headline?: string | null;
+            body?: string | null;
+            media?: (number | null) | Media;
+            items?:
+              | {
+                  title: string;
+                  body?: string | null;
+                  media?: (number | null) | Media;
+                  id?: string | null;
+                }[]
+              | null;
+            link?: string | null;
+            linkLabel?: string | null;
+            gallery?:
+              | {
+                  image: number | Media;
+                  caption?: string | null;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'gallery';
+          }
+        | {
+            enabled?: boolean | null;
+            variant?: ('light' | 'forest') | null;
+            headline?: string | null;
+            body?: string | null;
+            media?: (number | null) | Media;
+            items?:
+              | {
+                  title: string;
+                  body?: string | null;
+                  media?: (number | null) | Media;
+                  id?: string | null;
+                }[]
+              | null;
+            link?: string | null;
+            linkLabel?: string | null;
+            videoURL?: string | null;
+            poster?: (number | null) | Media;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'videoEmbed';
+          }
+        | {
+            enabled?: boolean | null;
+            variant?: ('light' | 'forest') | null;
+            headline?: string | null;
+            body?: string | null;
+            media?: (number | null) | Media;
+            items?:
+              | {
+                  title: string;
+                  body?: string | null;
+                  media?: (number | null) | Media;
+                  id?: string | null;
+                }[]
+              | null;
+            link?: string | null;
+            linkLabel?: string | null;
+            category?: (number | null) | PortfolioCategory;
+            limit?: number | null;
+            featuredOnly?: boolean | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'portfolioFeed';
+          }
+        | {
+            enabled?: boolean | null;
+            variant?: ('light' | 'forest') | null;
+            headline?: string | null;
+            body?: string | null;
+            media?: (number | null) | Media;
+            items?:
+              | {
+                  title: string;
+                  body?: string | null;
+                  media?: (number | null) | Media;
+                  id?: string | null;
+                }[]
+              | null;
+            link?: string | null;
+            linkLabel?: string | null;
+            category?: (number | null) | PostCategory;
+            limit?: number | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'newsFeed';
+          }
+        | {
+            enabled?: boolean | null;
+            variant?: ('light' | 'forest') | null;
+            headline?: string | null;
+            body?: string | null;
+            media?: (number | null) | Media;
+            items?:
+              | {
+                  title: string;
+                  body?: string | null;
+                  media?: (number | null) | Media;
+                  id?: string | null;
+                }[]
+              | null;
+            link?: string | null;
+            linkLabel?: string | null;
+            questions?:
+              | {
+                  question: string;
+                  answer: string;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'faq';
+          }
+        | {
+            enabled?: boolean | null;
+            variant?: ('light' | 'forest') | null;
+            headline?: string | null;
+            body?: string | null;
+            media?: (number | null) | Media;
+            items?:
+              | {
+                  title: string;
+                  body?: string | null;
+                  media?: (number | null) | Media;
+                  id?: string | null;
+                }[]
+              | null;
+            link?: string | null;
+            linkLabel?: string | null;
+            secondaryLink?: string | null;
+            secondaryLinkLabel?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'callToAction';
+          }
+        | {
+            enabled?: boolean | null;
+            variant?: ('light' | 'forest') | null;
+            headline?: string | null;
+            body?: string | null;
+            media?: (number | null) | Media;
+            items?:
+              | {
+                  title: string;
+                  body?: string | null;
+                  media?: (number | null) | Media;
+                  id?: string | null;
+                }[]
+              | null;
+            link?: string | null;
+            linkLabel?: string | null;
+            gallery?:
+              | {
+                  image: number | Media;
+                  caption?: string | null;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'communityShowcase';
+          }
+      )[]
+    | null;
+  seo?: {
+    title?: string | null;
+    description?: string | null;
+  };
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * To replace an image, upload a new file and select it on the page. Existing images stay available to published pages and version history.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "media".
+ */
+export interface Media {
+  id: number;
+  alt: string;
+  caption?: string | null;
+  attribution: string;
+  usage?: string | null;
+  /**
+   * Publisher approval requires both ID and EN alt text. Referenced approved files cannot be withdrawn.
+   */
+  approved?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "portfolioCategories".
+ */
+export interface PortfolioCategory {
+  id: number;
+  key: string;
+  label: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "postCategories".
+ */
+export interface PostCategory {
+  id: number;
+  key: string;
+  label: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "posts".
+ */
+export interface Post {
+  id: number;
+  key: string;
+  title: string;
+  slug: string;
+  /**
+   * Publisher must explicitly review both translations; shared block order publishes together.
+   */
+  reviewedLocales?: ('id' | 'en')[] | null;
+  excerpt?: string | null;
+  heroMedia?: (number | null) | Media;
+  layout?:
+    | (
+        | {
+            enabled?: boolean | null;
+            variant?: ('light' | 'forest') | null;
+            headline?: string | null;
+            body?: string | null;
+            media?: (number | null) | Media;
+            items?:
+              | {
+                  title: string;
+                  body?: string | null;
+                  media?: (number | null) | Media;
+                  id?: string | null;
+                }[]
+              | null;
+            link?: string | null;
+            linkLabel?: string | null;
+            secondaryLink?: string | null;
+            secondaryLinkLabel?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'hero';
+          }
+        | {
+            enabled?: boolean | null;
+            variant?: ('light' | 'forest') | null;
+            headline?: string | null;
+            body?: string | null;
+            media?: (number | null) | Media;
+            items?:
+              | {
+                  title: string;
+                  body?: string | null;
+                  media?: (number | null) | Media;
+                  id?: string | null;
+                }[]
+              | null;
+            link?: string | null;
+            linkLabel?: string | null;
+            content?: {
+              root: {
+                type: string;
+                children: {
+                  type: any;
+                  version: number;
+                  [k: string]: unknown;
+                }[];
+                direction: ('ltr' | 'rtl') | null;
+                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                indent: number;
+                version: number;
+              };
+              [k: string]: unknown;
+            } | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'richText';
+          }
+        | {
+            enabled?: boolean | null;
+            variant?: ('light' | 'forest') | null;
+            headline?: string | null;
+            body?: string | null;
+            media?: (number | null) | Media;
+            items?:
+              | {
+                  title: string;
+                  body?: string | null;
+                  media?: (number | null) | Media;
+                  id?: string | null;
+                }[]
+              | null;
+            link?: string | null;
+            linkLabel?: string | null;
+            imagePosition?: ('left' | 'right') | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'imageText';
+          }
+        | {
+            enabled?: boolean | null;
+            variant?: ('light' | 'forest') | null;
+            headline?: string | null;
+            body?: string | null;
+            media?: (number | null) | Media;
+            items?:
+              | {
+                  title: string;
+                  body?: string | null;
+                  media?: (number | null) | Media;
+                  id?: string | null;
+                }[]
+              | null;
+            link?: string | null;
+            linkLabel?: string | null;
+            columns?: ('2' | '3') | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'featureGrid';
+          }
+        | {
+            enabled?: boolean | null;
+            variant?: ('light' | 'forest') | null;
+            headline?: string | null;
+            body?: string | null;
+            media?: (number | null) | Media;
+            items?:
+              | {
+                  title: string;
+                  body?: string | null;
+                  media?: (number | null) | Media;
+                  id?: string | null;
+                }[]
+              | null;
+            link?: string | null;
+            linkLabel?: string | null;
+            gallery?:
+              | {
+                  image: number | Media;
+                  caption?: string | null;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'mediaShowcase';
+          }
+        | {
+            enabled?: boolean | null;
+            variant?: ('light' | 'forest') | null;
+            headline?: string | null;
+            body?: string | null;
+            media?: (number | null) | Media;
+            items?:
+              | {
+                  title: string;
+                  body?: string | null;
+                  media?: (number | null) | Media;
+                  id?: string | null;
+                }[]
+              | null;
+            link?: string | null;
+            linkLabel?: string | null;
+            statistics?:
+              | {
+                  value: string;
+                  label: string;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'stats';
+          }
+        | {
+            enabled?: boolean | null;
+            variant?: ('light' | 'forest') | null;
+            headline?: string | null;
+            body?: string | null;
+            media?: (number | null) | Media;
+            items?:
+              | {
+                  title: string;
+                  body?: string | null;
+                  media?: (number | null) | Media;
+                  id?: string | null;
+                }[]
+              | null;
+            link?: string | null;
+            linkLabel?: string | null;
+            gallery?:
+              | {
+                  image: number | Media;
+                  caption?: string | null;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'gallery';
+          }
+        | {
+            enabled?: boolean | null;
+            variant?: ('light' | 'forest') | null;
+            headline?: string | null;
+            body?: string | null;
+            media?: (number | null) | Media;
+            items?:
+              | {
+                  title: string;
+                  body?: string | null;
+                  media?: (number | null) | Media;
+                  id?: string | null;
+                }[]
+              | null;
+            link?: string | null;
+            linkLabel?: string | null;
+            videoURL?: string | null;
+            poster?: (number | null) | Media;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'videoEmbed';
+          }
+        | {
+            enabled?: boolean | null;
+            variant?: ('light' | 'forest') | null;
+            headline?: string | null;
+            body?: string | null;
+            media?: (number | null) | Media;
+            items?:
+              | {
+                  title: string;
+                  body?: string | null;
+                  media?: (number | null) | Media;
+                  id?: string | null;
+                }[]
+              | null;
+            link?: string | null;
+            linkLabel?: string | null;
+            category?: (number | null) | PortfolioCategory;
+            limit?: number | null;
+            featuredOnly?: boolean | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'portfolioFeed';
+          }
+        | {
+            enabled?: boolean | null;
+            variant?: ('light' | 'forest') | null;
+            headline?: string | null;
+            body?: string | null;
+            media?: (number | null) | Media;
+            items?:
+              | {
+                  title: string;
+                  body?: string | null;
+                  media?: (number | null) | Media;
+                  id?: string | null;
+                }[]
+              | null;
+            link?: string | null;
+            linkLabel?: string | null;
+            category?: (number | null) | PostCategory;
+            limit?: number | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'newsFeed';
+          }
+        | {
+            enabled?: boolean | null;
+            variant?: ('light' | 'forest') | null;
+            headline?: string | null;
+            body?: string | null;
+            media?: (number | null) | Media;
+            items?:
+              | {
+                  title: string;
+                  body?: string | null;
+                  media?: (number | null) | Media;
+                  id?: string | null;
+                }[]
+              | null;
+            link?: string | null;
+            linkLabel?: string | null;
+            questions?:
+              | {
+                  question: string;
+                  answer: string;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'faq';
+          }
+        | {
+            enabled?: boolean | null;
+            variant?: ('light' | 'forest') | null;
+            headline?: string | null;
+            body?: string | null;
+            media?: (number | null) | Media;
+            items?:
+              | {
+                  title: string;
+                  body?: string | null;
+                  media?: (number | null) | Media;
+                  id?: string | null;
+                }[]
+              | null;
+            link?: string | null;
+            linkLabel?: string | null;
+            secondaryLink?: string | null;
+            secondaryLinkLabel?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'callToAction';
+          }
+        | {
+            enabled?: boolean | null;
+            variant?: ('light' | 'forest') | null;
+            headline?: string | null;
+            body?: string | null;
+            media?: (number | null) | Media;
+            items?:
+              | {
+                  title: string;
+                  body?: string | null;
+                  media?: (number | null) | Media;
+                  id?: string | null;
+                }[]
+              | null;
+            link?: string | null;
+            linkLabel?: string | null;
+            gallery?:
+              | {
+                  image: number | Media;
+                  caption?: string | null;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'communityShowcase';
+          }
+      )[]
+    | null;
+  categories?: (number | PostCategory)[] | null;
+  /**
+   * Editorial publication date only; automatic scheduled publishing is disabled.
+   */
+  publishAt?: string | null;
+  content?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  seo?: {
+    title?: string | null;
+    description?: string | null;
+  };
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "portfolioProjects".
+ */
+export interface PortfolioProject {
+  id: number;
+  key: string;
+  title: string;
+  slug: string;
+  /**
+   * Publisher must explicitly review both translations; shared block order publishes together.
+   */
+  reviewedLocales?: ('id' | 'en')[] | null;
+  excerpt?: string | null;
+  heroMedia?: (number | null) | Media;
+  layout?:
+    | (
+        | {
+            enabled?: boolean | null;
+            variant?: ('light' | 'forest') | null;
+            headline?: string | null;
+            body?: string | null;
+            media?: (number | null) | Media;
+            items?:
+              | {
+                  title: string;
+                  body?: string | null;
+                  media?: (number | null) | Media;
+                  id?: string | null;
+                }[]
+              | null;
+            link?: string | null;
+            linkLabel?: string | null;
+            secondaryLink?: string | null;
+            secondaryLinkLabel?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'hero';
+          }
+        | {
+            enabled?: boolean | null;
+            variant?: ('light' | 'forest') | null;
+            headline?: string | null;
+            body?: string | null;
+            media?: (number | null) | Media;
+            items?:
+              | {
+                  title: string;
+                  body?: string | null;
+                  media?: (number | null) | Media;
+                  id?: string | null;
+                }[]
+              | null;
+            link?: string | null;
+            linkLabel?: string | null;
+            content?: {
+              root: {
+                type: string;
+                children: {
+                  type: any;
+                  version: number;
+                  [k: string]: unknown;
+                }[];
+                direction: ('ltr' | 'rtl') | null;
+                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                indent: number;
+                version: number;
+              };
+              [k: string]: unknown;
+            } | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'richText';
+          }
+        | {
+            enabled?: boolean | null;
+            variant?: ('light' | 'forest') | null;
+            headline?: string | null;
+            body?: string | null;
+            media?: (number | null) | Media;
+            items?:
+              | {
+                  title: string;
+                  body?: string | null;
+                  media?: (number | null) | Media;
+                  id?: string | null;
+                }[]
+              | null;
+            link?: string | null;
+            linkLabel?: string | null;
+            imagePosition?: ('left' | 'right') | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'imageText';
+          }
+        | {
+            enabled?: boolean | null;
+            variant?: ('light' | 'forest') | null;
+            headline?: string | null;
+            body?: string | null;
+            media?: (number | null) | Media;
+            items?:
+              | {
+                  title: string;
+                  body?: string | null;
+                  media?: (number | null) | Media;
+                  id?: string | null;
+                }[]
+              | null;
+            link?: string | null;
+            linkLabel?: string | null;
+            columns?: ('2' | '3') | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'featureGrid';
+          }
+        | {
+            enabled?: boolean | null;
+            variant?: ('light' | 'forest') | null;
+            headline?: string | null;
+            body?: string | null;
+            media?: (number | null) | Media;
+            items?:
+              | {
+                  title: string;
+                  body?: string | null;
+                  media?: (number | null) | Media;
+                  id?: string | null;
+                }[]
+              | null;
+            link?: string | null;
+            linkLabel?: string | null;
+            gallery?:
+              | {
+                  image: number | Media;
+                  caption?: string | null;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'mediaShowcase';
+          }
+        | {
+            enabled?: boolean | null;
+            variant?: ('light' | 'forest') | null;
+            headline?: string | null;
+            body?: string | null;
+            media?: (number | null) | Media;
+            items?:
+              | {
+                  title: string;
+                  body?: string | null;
+                  media?: (number | null) | Media;
+                  id?: string | null;
+                }[]
+              | null;
+            link?: string | null;
+            linkLabel?: string | null;
+            statistics?:
+              | {
+                  value: string;
+                  label: string;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'stats';
+          }
+        | {
+            enabled?: boolean | null;
+            variant?: ('light' | 'forest') | null;
+            headline?: string | null;
+            body?: string | null;
+            media?: (number | null) | Media;
+            items?:
+              | {
+                  title: string;
+                  body?: string | null;
+                  media?: (number | null) | Media;
+                  id?: string | null;
+                }[]
+              | null;
+            link?: string | null;
+            linkLabel?: string | null;
+            gallery?:
+              | {
+                  image: number | Media;
+                  caption?: string | null;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'gallery';
+          }
+        | {
+            enabled?: boolean | null;
+            variant?: ('light' | 'forest') | null;
+            headline?: string | null;
+            body?: string | null;
+            media?: (number | null) | Media;
+            items?:
+              | {
+                  title: string;
+                  body?: string | null;
+                  media?: (number | null) | Media;
+                  id?: string | null;
+                }[]
+              | null;
+            link?: string | null;
+            linkLabel?: string | null;
+            videoURL?: string | null;
+            poster?: (number | null) | Media;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'videoEmbed';
+          }
+        | {
+            enabled?: boolean | null;
+            variant?: ('light' | 'forest') | null;
+            headline?: string | null;
+            body?: string | null;
+            media?: (number | null) | Media;
+            items?:
+              | {
+                  title: string;
+                  body?: string | null;
+                  media?: (number | null) | Media;
+                  id?: string | null;
+                }[]
+              | null;
+            link?: string | null;
+            linkLabel?: string | null;
+            category?: (number | null) | PortfolioCategory;
+            limit?: number | null;
+            featuredOnly?: boolean | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'portfolioFeed';
+          }
+        | {
+            enabled?: boolean | null;
+            variant?: ('light' | 'forest') | null;
+            headline?: string | null;
+            body?: string | null;
+            media?: (number | null) | Media;
+            items?:
+              | {
+                  title: string;
+                  body?: string | null;
+                  media?: (number | null) | Media;
+                  id?: string | null;
+                }[]
+              | null;
+            link?: string | null;
+            linkLabel?: string | null;
+            category?: (number | null) | PostCategory;
+            limit?: number | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'newsFeed';
+          }
+        | {
+            enabled?: boolean | null;
+            variant?: ('light' | 'forest') | null;
+            headline?: string | null;
+            body?: string | null;
+            media?: (number | null) | Media;
+            items?:
+              | {
+                  title: string;
+                  body?: string | null;
+                  media?: (number | null) | Media;
+                  id?: string | null;
+                }[]
+              | null;
+            link?: string | null;
+            linkLabel?: string | null;
+            questions?:
+              | {
+                  question: string;
+                  answer: string;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'faq';
+          }
+        | {
+            enabled?: boolean | null;
+            variant?: ('light' | 'forest') | null;
+            headline?: string | null;
+            body?: string | null;
+            media?: (number | null) | Media;
+            items?:
+              | {
+                  title: string;
+                  body?: string | null;
+                  media?: (number | null) | Media;
+                  id?: string | null;
+                }[]
+              | null;
+            link?: string | null;
+            linkLabel?: string | null;
+            secondaryLink?: string | null;
+            secondaryLinkLabel?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'callToAction';
+          }
+        | {
+            enabled?: boolean | null;
+            variant?: ('light' | 'forest') | null;
+            headline?: string | null;
+            body?: string | null;
+            media?: (number | null) | Media;
+            items?:
+              | {
+                  title: string;
+                  body?: string | null;
+                  media?: (number | null) | Media;
+                  id?: string | null;
+                }[]
+              | null;
+            link?: string | null;
+            linkLabel?: string | null;
+            gallery?:
+              | {
+                  image: number | Media;
+                  caption?: string | null;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'communityShowcase';
+          }
+      )[]
+    | null;
+  categories?: (number | PortfolioCategory)[] | null;
+  featured?: boolean | null;
+  description?: string | null;
+  caseStudy?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  gallery?:
+    | {
+        image: number | Media;
+        id?: string | null;
+      }[]
+    | null;
+  seo?: {
+    title?: string | null;
+    description?: string | null;
+  };
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "products".
+ */
+export interface Product {
+  id: number;
+  key: string;
+  title: string;
+  slug: string;
+  /**
+   * Publisher must explicitly review both translations; shared block order publishes together.
+   */
+  reviewedLocales?: ('id' | 'en')[] | null;
+  excerpt?: string | null;
+  heroMedia?: (number | null) | Media;
+  layout?:
+    | (
+        | {
+            enabled?: boolean | null;
+            variant?: ('light' | 'forest') | null;
+            headline?: string | null;
+            body?: string | null;
+            media?: (number | null) | Media;
+            items?:
+              | {
+                  title: string;
+                  body?: string | null;
+                  media?: (number | null) | Media;
+                  id?: string | null;
+                }[]
+              | null;
+            link?: string | null;
+            linkLabel?: string | null;
+            secondaryLink?: string | null;
+            secondaryLinkLabel?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'hero';
+          }
+        | {
+            enabled?: boolean | null;
+            variant?: ('light' | 'forest') | null;
+            headline?: string | null;
+            body?: string | null;
+            media?: (number | null) | Media;
+            items?:
+              | {
+                  title: string;
+                  body?: string | null;
+                  media?: (number | null) | Media;
+                  id?: string | null;
+                }[]
+              | null;
+            link?: string | null;
+            linkLabel?: string | null;
+            content?: {
+              root: {
+                type: string;
+                children: {
+                  type: any;
+                  version: number;
+                  [k: string]: unknown;
+                }[];
+                direction: ('ltr' | 'rtl') | null;
+                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                indent: number;
+                version: number;
+              };
+              [k: string]: unknown;
+            } | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'richText';
+          }
+        | {
+            enabled?: boolean | null;
+            variant?: ('light' | 'forest') | null;
+            headline?: string | null;
+            body?: string | null;
+            media?: (number | null) | Media;
+            items?:
+              | {
+                  title: string;
+                  body?: string | null;
+                  media?: (number | null) | Media;
+                  id?: string | null;
+                }[]
+              | null;
+            link?: string | null;
+            linkLabel?: string | null;
+            imagePosition?: ('left' | 'right') | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'imageText';
+          }
+        | {
+            enabled?: boolean | null;
+            variant?: ('light' | 'forest') | null;
+            headline?: string | null;
+            body?: string | null;
+            media?: (number | null) | Media;
+            items?:
+              | {
+                  title: string;
+                  body?: string | null;
+                  media?: (number | null) | Media;
+                  id?: string | null;
+                }[]
+              | null;
+            link?: string | null;
+            linkLabel?: string | null;
+            columns?: ('2' | '3') | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'featureGrid';
+          }
+        | {
+            enabled?: boolean | null;
+            variant?: ('light' | 'forest') | null;
+            headline?: string | null;
+            body?: string | null;
+            media?: (number | null) | Media;
+            items?:
+              | {
+                  title: string;
+                  body?: string | null;
+                  media?: (number | null) | Media;
+                  id?: string | null;
+                }[]
+              | null;
+            link?: string | null;
+            linkLabel?: string | null;
+            gallery?:
+              | {
+                  image: number | Media;
+                  caption?: string | null;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'mediaShowcase';
+          }
+        | {
+            enabled?: boolean | null;
+            variant?: ('light' | 'forest') | null;
+            headline?: string | null;
+            body?: string | null;
+            media?: (number | null) | Media;
+            items?:
+              | {
+                  title: string;
+                  body?: string | null;
+                  media?: (number | null) | Media;
+                  id?: string | null;
+                }[]
+              | null;
+            link?: string | null;
+            linkLabel?: string | null;
+            statistics?:
+              | {
+                  value: string;
+                  label: string;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'stats';
+          }
+        | {
+            enabled?: boolean | null;
+            variant?: ('light' | 'forest') | null;
+            headline?: string | null;
+            body?: string | null;
+            media?: (number | null) | Media;
+            items?:
+              | {
+                  title: string;
+                  body?: string | null;
+                  media?: (number | null) | Media;
+                  id?: string | null;
+                }[]
+              | null;
+            link?: string | null;
+            linkLabel?: string | null;
+            gallery?:
+              | {
+                  image: number | Media;
+                  caption?: string | null;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'gallery';
+          }
+        | {
+            enabled?: boolean | null;
+            variant?: ('light' | 'forest') | null;
+            headline?: string | null;
+            body?: string | null;
+            media?: (number | null) | Media;
+            items?:
+              | {
+                  title: string;
+                  body?: string | null;
+                  media?: (number | null) | Media;
+                  id?: string | null;
+                }[]
+              | null;
+            link?: string | null;
+            linkLabel?: string | null;
+            videoURL?: string | null;
+            poster?: (number | null) | Media;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'videoEmbed';
+          }
+        | {
+            enabled?: boolean | null;
+            variant?: ('light' | 'forest') | null;
+            headline?: string | null;
+            body?: string | null;
+            media?: (number | null) | Media;
+            items?:
+              | {
+                  title: string;
+                  body?: string | null;
+                  media?: (number | null) | Media;
+                  id?: string | null;
+                }[]
+              | null;
+            link?: string | null;
+            linkLabel?: string | null;
+            category?: (number | null) | PortfolioCategory;
+            limit?: number | null;
+            featuredOnly?: boolean | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'portfolioFeed';
+          }
+        | {
+            enabled?: boolean | null;
+            variant?: ('light' | 'forest') | null;
+            headline?: string | null;
+            body?: string | null;
+            media?: (number | null) | Media;
+            items?:
+              | {
+                  title: string;
+                  body?: string | null;
+                  media?: (number | null) | Media;
+                  id?: string | null;
+                }[]
+              | null;
+            link?: string | null;
+            linkLabel?: string | null;
+            category?: (number | null) | PostCategory;
+            limit?: number | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'newsFeed';
+          }
+        | {
+            enabled?: boolean | null;
+            variant?: ('light' | 'forest') | null;
+            headline?: string | null;
+            body?: string | null;
+            media?: (number | null) | Media;
+            items?:
+              | {
+                  title: string;
+                  body?: string | null;
+                  media?: (number | null) | Media;
+                  id?: string | null;
+                }[]
+              | null;
+            link?: string | null;
+            linkLabel?: string | null;
+            questions?:
+              | {
+                  question: string;
+                  answer: string;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'faq';
+          }
+        | {
+            enabled?: boolean | null;
+            variant?: ('light' | 'forest') | null;
+            headline?: string | null;
+            body?: string | null;
+            media?: (number | null) | Media;
+            items?:
+              | {
+                  title: string;
+                  body?: string | null;
+                  media?: (number | null) | Media;
+                  id?: string | null;
+                }[]
+              | null;
+            link?: string | null;
+            linkLabel?: string | null;
+            secondaryLink?: string | null;
+            secondaryLinkLabel?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'callToAction';
+          }
+        | {
+            enabled?: boolean | null;
+            variant?: ('light' | 'forest') | null;
+            headline?: string | null;
+            body?: string | null;
+            media?: (number | null) | Media;
+            items?:
+              | {
+                  title: string;
+                  body?: string | null;
+                  media?: (number | null) | Media;
+                  id?: string | null;
+                }[]
+              | null;
+            link?: string | null;
+            linkLabel?: string | null;
+            gallery?:
+              | {
+                  image: number | Media;
+                  caption?: string | null;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'communityShowcase';
+          }
+      )[]
+    | null;
+  overview?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  features?:
+    | {
+        title: string;
+        description?: string | null;
+        media?: (number | null) | Media;
+        id?: string | null;
+      }[]
+    | null;
+  seo?: {
+    title?: string | null;
+    description?: string | null;
+  };
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * Activity history. Staff IDs and roles remain recorded when an account is removed. Older unknown entries are labelled explicitly.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "auditEvents".
+ */
+export interface AuditEvent {
+  id: number;
+  actor?: (number | null) | User;
+  actorIdSnapshot: string;
+  actorRoleSnapshot: string;
+  action: string;
+  resource: string;
+  resourceId: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "softwareReleases".
+ */
+export interface SoftwareRelease {
+  id: number;
+  product: number | Product;
+  version: string;
+  channel: 'stable' | 'preview';
+  publishedAt?: string | null;
+  changelog?: string | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * Private metadata only. Installer uploads, supported architectures, verification and activation require Phase 06.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "releaseAssets".
+ */
+export interface ReleaseAsset {
+  id: number;
+  release: number | SoftwareRelease;
+  os: 'windows' | 'macos';
+  /**
+   * TBD: must match actual builds before activation; no architecture list is invented.
+   */
+  architecture?: string | null;
+  storageKey?: string | null;
+  filename?: string | null;
+  sizeBytes?: number | null;
+  sha256?: string | null;
+  uploadStatus: 'pending';
+  visibility: 'private';
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Restricted personal data. Public submission/delivery and retention policy are not enabled by this schema.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contactSubmissions".
+ */
+export interface ContactSubmission {
+  id: number;
+  name: string;
+  email: string;
+  message: string;
+  locale: 'id' | 'en';
+  status: 'new' | 'handled';
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Private aggregate event model; no IP, user agent or customer identity is collected. No download recording endpoint is enabled.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "downloadEvents".
+ */
+export interface DownloadEvent {
+  id: number;
+  release: number | SoftwareRelease;
+  asset: number | ReleaseAsset;
+  os: 'windows' | 'macos';
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -167,10 +1803,59 @@ export interface PayloadKv {
  */
 export interface PayloadLockedDocument {
   id: number;
-  document?: {
-    relationTo: 'users';
-    value: number | User;
-  } | null;
+  document?:
+    | ({
+        relationTo: 'users';
+        value: number | User;
+      } | null)
+    | ({
+        relationTo: 'pages';
+        value: number | Page;
+      } | null)
+    | ({
+        relationTo: 'posts';
+        value: number | Post;
+      } | null)
+    | ({
+        relationTo: 'portfolioProjects';
+        value: number | PortfolioProject;
+      } | null)
+    | ({
+        relationTo: 'products';
+        value: number | Product;
+      } | null)
+    | ({
+        relationTo: 'postCategories';
+        value: number | PostCategory;
+      } | null)
+    | ({
+        relationTo: 'portfolioCategories';
+        value: number | PortfolioCategory;
+      } | null)
+    | ({
+        relationTo: 'media';
+        value: number | Media;
+      } | null)
+    | ({
+        relationTo: 'auditEvents';
+        value: number | AuditEvent;
+      } | null)
+    | ({
+        relationTo: 'softwareReleases';
+        value: number | SoftwareRelease;
+      } | null)
+    | ({
+        relationTo: 'releaseAssets';
+        value: number | ReleaseAsset;
+      } | null)
+    | ({
+        relationTo: 'contactSubmissions';
+        value: number | ContactSubmission;
+      } | null)
+    | ({
+        relationTo: 'downloadEvents';
+        value: number | DownloadEvent;
+      } | null);
   globalSlug?: string | null;
   user: {
     relationTo: 'users';
@@ -241,6 +1926,1525 @@ export interface UsersSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "pages_select".
+ */
+export interface PagesSelect<T extends boolean = true> {
+  key?: T;
+  title?: T;
+  slug?: T;
+  reviewedLocales?: T;
+  excerpt?: T;
+  heroMedia?: T;
+  layout?:
+    | T
+    | {
+        hero?:
+          | T
+          | {
+              enabled?: T;
+              variant?: T;
+              headline?: T;
+              body?: T;
+              media?: T;
+              items?:
+                | T
+                | {
+                    title?: T;
+                    body?: T;
+                    media?: T;
+                    id?: T;
+                  };
+              link?: T;
+              linkLabel?: T;
+              secondaryLink?: T;
+              secondaryLinkLabel?: T;
+              id?: T;
+              blockName?: T;
+            };
+        richText?:
+          | T
+          | {
+              enabled?: T;
+              variant?: T;
+              headline?: T;
+              body?: T;
+              media?: T;
+              items?:
+                | T
+                | {
+                    title?: T;
+                    body?: T;
+                    media?: T;
+                    id?: T;
+                  };
+              link?: T;
+              linkLabel?: T;
+              content?: T;
+              id?: T;
+              blockName?: T;
+            };
+        imageText?:
+          | T
+          | {
+              enabled?: T;
+              variant?: T;
+              headline?: T;
+              body?: T;
+              media?: T;
+              items?:
+                | T
+                | {
+                    title?: T;
+                    body?: T;
+                    media?: T;
+                    id?: T;
+                  };
+              link?: T;
+              linkLabel?: T;
+              imagePosition?: T;
+              id?: T;
+              blockName?: T;
+            };
+        featureGrid?:
+          | T
+          | {
+              enabled?: T;
+              variant?: T;
+              headline?: T;
+              body?: T;
+              media?: T;
+              items?:
+                | T
+                | {
+                    title?: T;
+                    body?: T;
+                    media?: T;
+                    id?: T;
+                  };
+              link?: T;
+              linkLabel?: T;
+              columns?: T;
+              id?: T;
+              blockName?: T;
+            };
+        mediaShowcase?:
+          | T
+          | {
+              enabled?: T;
+              variant?: T;
+              headline?: T;
+              body?: T;
+              media?: T;
+              items?:
+                | T
+                | {
+                    title?: T;
+                    body?: T;
+                    media?: T;
+                    id?: T;
+                  };
+              link?: T;
+              linkLabel?: T;
+              gallery?:
+                | T
+                | {
+                    image?: T;
+                    caption?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        stats?:
+          | T
+          | {
+              enabled?: T;
+              variant?: T;
+              headline?: T;
+              body?: T;
+              media?: T;
+              items?:
+                | T
+                | {
+                    title?: T;
+                    body?: T;
+                    media?: T;
+                    id?: T;
+                  };
+              link?: T;
+              linkLabel?: T;
+              statistics?:
+                | T
+                | {
+                    value?: T;
+                    label?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        gallery?:
+          | T
+          | {
+              enabled?: T;
+              variant?: T;
+              headline?: T;
+              body?: T;
+              media?: T;
+              items?:
+                | T
+                | {
+                    title?: T;
+                    body?: T;
+                    media?: T;
+                    id?: T;
+                  };
+              link?: T;
+              linkLabel?: T;
+              gallery?:
+                | T
+                | {
+                    image?: T;
+                    caption?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        videoEmbed?:
+          | T
+          | {
+              enabled?: T;
+              variant?: T;
+              headline?: T;
+              body?: T;
+              media?: T;
+              items?:
+                | T
+                | {
+                    title?: T;
+                    body?: T;
+                    media?: T;
+                    id?: T;
+                  };
+              link?: T;
+              linkLabel?: T;
+              videoURL?: T;
+              poster?: T;
+              id?: T;
+              blockName?: T;
+            };
+        portfolioFeed?:
+          | T
+          | {
+              enabled?: T;
+              variant?: T;
+              headline?: T;
+              body?: T;
+              media?: T;
+              items?:
+                | T
+                | {
+                    title?: T;
+                    body?: T;
+                    media?: T;
+                    id?: T;
+                  };
+              link?: T;
+              linkLabel?: T;
+              category?: T;
+              limit?: T;
+              featuredOnly?: T;
+              id?: T;
+              blockName?: T;
+            };
+        newsFeed?:
+          | T
+          | {
+              enabled?: T;
+              variant?: T;
+              headline?: T;
+              body?: T;
+              media?: T;
+              items?:
+                | T
+                | {
+                    title?: T;
+                    body?: T;
+                    media?: T;
+                    id?: T;
+                  };
+              link?: T;
+              linkLabel?: T;
+              category?: T;
+              limit?: T;
+              id?: T;
+              blockName?: T;
+            };
+        faq?:
+          | T
+          | {
+              enabled?: T;
+              variant?: T;
+              headline?: T;
+              body?: T;
+              media?: T;
+              items?:
+                | T
+                | {
+                    title?: T;
+                    body?: T;
+                    media?: T;
+                    id?: T;
+                  };
+              link?: T;
+              linkLabel?: T;
+              questions?:
+                | T
+                | {
+                    question?: T;
+                    answer?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        callToAction?:
+          | T
+          | {
+              enabled?: T;
+              variant?: T;
+              headline?: T;
+              body?: T;
+              media?: T;
+              items?:
+                | T
+                | {
+                    title?: T;
+                    body?: T;
+                    media?: T;
+                    id?: T;
+                  };
+              link?: T;
+              linkLabel?: T;
+              secondaryLink?: T;
+              secondaryLinkLabel?: T;
+              id?: T;
+              blockName?: T;
+            };
+        communityShowcase?:
+          | T
+          | {
+              enabled?: T;
+              variant?: T;
+              headline?: T;
+              body?: T;
+              media?: T;
+              items?:
+                | T
+                | {
+                    title?: T;
+                    body?: T;
+                    media?: T;
+                    id?: T;
+                  };
+              link?: T;
+              linkLabel?: T;
+              gallery?:
+                | T
+                | {
+                    image?: T;
+                    caption?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+      };
+  seo?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "posts_select".
+ */
+export interface PostsSelect<T extends boolean = true> {
+  key?: T;
+  title?: T;
+  slug?: T;
+  reviewedLocales?: T;
+  excerpt?: T;
+  heroMedia?: T;
+  layout?:
+    | T
+    | {
+        hero?:
+          | T
+          | {
+              enabled?: T;
+              variant?: T;
+              headline?: T;
+              body?: T;
+              media?: T;
+              items?:
+                | T
+                | {
+                    title?: T;
+                    body?: T;
+                    media?: T;
+                    id?: T;
+                  };
+              link?: T;
+              linkLabel?: T;
+              secondaryLink?: T;
+              secondaryLinkLabel?: T;
+              id?: T;
+              blockName?: T;
+            };
+        richText?:
+          | T
+          | {
+              enabled?: T;
+              variant?: T;
+              headline?: T;
+              body?: T;
+              media?: T;
+              items?:
+                | T
+                | {
+                    title?: T;
+                    body?: T;
+                    media?: T;
+                    id?: T;
+                  };
+              link?: T;
+              linkLabel?: T;
+              content?: T;
+              id?: T;
+              blockName?: T;
+            };
+        imageText?:
+          | T
+          | {
+              enabled?: T;
+              variant?: T;
+              headline?: T;
+              body?: T;
+              media?: T;
+              items?:
+                | T
+                | {
+                    title?: T;
+                    body?: T;
+                    media?: T;
+                    id?: T;
+                  };
+              link?: T;
+              linkLabel?: T;
+              imagePosition?: T;
+              id?: T;
+              blockName?: T;
+            };
+        featureGrid?:
+          | T
+          | {
+              enabled?: T;
+              variant?: T;
+              headline?: T;
+              body?: T;
+              media?: T;
+              items?:
+                | T
+                | {
+                    title?: T;
+                    body?: T;
+                    media?: T;
+                    id?: T;
+                  };
+              link?: T;
+              linkLabel?: T;
+              columns?: T;
+              id?: T;
+              blockName?: T;
+            };
+        mediaShowcase?:
+          | T
+          | {
+              enabled?: T;
+              variant?: T;
+              headline?: T;
+              body?: T;
+              media?: T;
+              items?:
+                | T
+                | {
+                    title?: T;
+                    body?: T;
+                    media?: T;
+                    id?: T;
+                  };
+              link?: T;
+              linkLabel?: T;
+              gallery?:
+                | T
+                | {
+                    image?: T;
+                    caption?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        stats?:
+          | T
+          | {
+              enabled?: T;
+              variant?: T;
+              headline?: T;
+              body?: T;
+              media?: T;
+              items?:
+                | T
+                | {
+                    title?: T;
+                    body?: T;
+                    media?: T;
+                    id?: T;
+                  };
+              link?: T;
+              linkLabel?: T;
+              statistics?:
+                | T
+                | {
+                    value?: T;
+                    label?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        gallery?:
+          | T
+          | {
+              enabled?: T;
+              variant?: T;
+              headline?: T;
+              body?: T;
+              media?: T;
+              items?:
+                | T
+                | {
+                    title?: T;
+                    body?: T;
+                    media?: T;
+                    id?: T;
+                  };
+              link?: T;
+              linkLabel?: T;
+              gallery?:
+                | T
+                | {
+                    image?: T;
+                    caption?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        videoEmbed?:
+          | T
+          | {
+              enabled?: T;
+              variant?: T;
+              headline?: T;
+              body?: T;
+              media?: T;
+              items?:
+                | T
+                | {
+                    title?: T;
+                    body?: T;
+                    media?: T;
+                    id?: T;
+                  };
+              link?: T;
+              linkLabel?: T;
+              videoURL?: T;
+              poster?: T;
+              id?: T;
+              blockName?: T;
+            };
+        portfolioFeed?:
+          | T
+          | {
+              enabled?: T;
+              variant?: T;
+              headline?: T;
+              body?: T;
+              media?: T;
+              items?:
+                | T
+                | {
+                    title?: T;
+                    body?: T;
+                    media?: T;
+                    id?: T;
+                  };
+              link?: T;
+              linkLabel?: T;
+              category?: T;
+              limit?: T;
+              featuredOnly?: T;
+              id?: T;
+              blockName?: T;
+            };
+        newsFeed?:
+          | T
+          | {
+              enabled?: T;
+              variant?: T;
+              headline?: T;
+              body?: T;
+              media?: T;
+              items?:
+                | T
+                | {
+                    title?: T;
+                    body?: T;
+                    media?: T;
+                    id?: T;
+                  };
+              link?: T;
+              linkLabel?: T;
+              category?: T;
+              limit?: T;
+              id?: T;
+              blockName?: T;
+            };
+        faq?:
+          | T
+          | {
+              enabled?: T;
+              variant?: T;
+              headline?: T;
+              body?: T;
+              media?: T;
+              items?:
+                | T
+                | {
+                    title?: T;
+                    body?: T;
+                    media?: T;
+                    id?: T;
+                  };
+              link?: T;
+              linkLabel?: T;
+              questions?:
+                | T
+                | {
+                    question?: T;
+                    answer?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        callToAction?:
+          | T
+          | {
+              enabled?: T;
+              variant?: T;
+              headline?: T;
+              body?: T;
+              media?: T;
+              items?:
+                | T
+                | {
+                    title?: T;
+                    body?: T;
+                    media?: T;
+                    id?: T;
+                  };
+              link?: T;
+              linkLabel?: T;
+              secondaryLink?: T;
+              secondaryLinkLabel?: T;
+              id?: T;
+              blockName?: T;
+            };
+        communityShowcase?:
+          | T
+          | {
+              enabled?: T;
+              variant?: T;
+              headline?: T;
+              body?: T;
+              media?: T;
+              items?:
+                | T
+                | {
+                    title?: T;
+                    body?: T;
+                    media?: T;
+                    id?: T;
+                  };
+              link?: T;
+              linkLabel?: T;
+              gallery?:
+                | T
+                | {
+                    image?: T;
+                    caption?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+      };
+  categories?: T;
+  publishAt?: T;
+  content?: T;
+  seo?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "portfolioProjects_select".
+ */
+export interface PortfolioProjectsSelect<T extends boolean = true> {
+  key?: T;
+  title?: T;
+  slug?: T;
+  reviewedLocales?: T;
+  excerpt?: T;
+  heroMedia?: T;
+  layout?:
+    | T
+    | {
+        hero?:
+          | T
+          | {
+              enabled?: T;
+              variant?: T;
+              headline?: T;
+              body?: T;
+              media?: T;
+              items?:
+                | T
+                | {
+                    title?: T;
+                    body?: T;
+                    media?: T;
+                    id?: T;
+                  };
+              link?: T;
+              linkLabel?: T;
+              secondaryLink?: T;
+              secondaryLinkLabel?: T;
+              id?: T;
+              blockName?: T;
+            };
+        richText?:
+          | T
+          | {
+              enabled?: T;
+              variant?: T;
+              headline?: T;
+              body?: T;
+              media?: T;
+              items?:
+                | T
+                | {
+                    title?: T;
+                    body?: T;
+                    media?: T;
+                    id?: T;
+                  };
+              link?: T;
+              linkLabel?: T;
+              content?: T;
+              id?: T;
+              blockName?: T;
+            };
+        imageText?:
+          | T
+          | {
+              enabled?: T;
+              variant?: T;
+              headline?: T;
+              body?: T;
+              media?: T;
+              items?:
+                | T
+                | {
+                    title?: T;
+                    body?: T;
+                    media?: T;
+                    id?: T;
+                  };
+              link?: T;
+              linkLabel?: T;
+              imagePosition?: T;
+              id?: T;
+              blockName?: T;
+            };
+        featureGrid?:
+          | T
+          | {
+              enabled?: T;
+              variant?: T;
+              headline?: T;
+              body?: T;
+              media?: T;
+              items?:
+                | T
+                | {
+                    title?: T;
+                    body?: T;
+                    media?: T;
+                    id?: T;
+                  };
+              link?: T;
+              linkLabel?: T;
+              columns?: T;
+              id?: T;
+              blockName?: T;
+            };
+        mediaShowcase?:
+          | T
+          | {
+              enabled?: T;
+              variant?: T;
+              headline?: T;
+              body?: T;
+              media?: T;
+              items?:
+                | T
+                | {
+                    title?: T;
+                    body?: T;
+                    media?: T;
+                    id?: T;
+                  };
+              link?: T;
+              linkLabel?: T;
+              gallery?:
+                | T
+                | {
+                    image?: T;
+                    caption?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        stats?:
+          | T
+          | {
+              enabled?: T;
+              variant?: T;
+              headline?: T;
+              body?: T;
+              media?: T;
+              items?:
+                | T
+                | {
+                    title?: T;
+                    body?: T;
+                    media?: T;
+                    id?: T;
+                  };
+              link?: T;
+              linkLabel?: T;
+              statistics?:
+                | T
+                | {
+                    value?: T;
+                    label?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        gallery?:
+          | T
+          | {
+              enabled?: T;
+              variant?: T;
+              headline?: T;
+              body?: T;
+              media?: T;
+              items?:
+                | T
+                | {
+                    title?: T;
+                    body?: T;
+                    media?: T;
+                    id?: T;
+                  };
+              link?: T;
+              linkLabel?: T;
+              gallery?:
+                | T
+                | {
+                    image?: T;
+                    caption?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        videoEmbed?:
+          | T
+          | {
+              enabled?: T;
+              variant?: T;
+              headline?: T;
+              body?: T;
+              media?: T;
+              items?:
+                | T
+                | {
+                    title?: T;
+                    body?: T;
+                    media?: T;
+                    id?: T;
+                  };
+              link?: T;
+              linkLabel?: T;
+              videoURL?: T;
+              poster?: T;
+              id?: T;
+              blockName?: T;
+            };
+        portfolioFeed?:
+          | T
+          | {
+              enabled?: T;
+              variant?: T;
+              headline?: T;
+              body?: T;
+              media?: T;
+              items?:
+                | T
+                | {
+                    title?: T;
+                    body?: T;
+                    media?: T;
+                    id?: T;
+                  };
+              link?: T;
+              linkLabel?: T;
+              category?: T;
+              limit?: T;
+              featuredOnly?: T;
+              id?: T;
+              blockName?: T;
+            };
+        newsFeed?:
+          | T
+          | {
+              enabled?: T;
+              variant?: T;
+              headline?: T;
+              body?: T;
+              media?: T;
+              items?:
+                | T
+                | {
+                    title?: T;
+                    body?: T;
+                    media?: T;
+                    id?: T;
+                  };
+              link?: T;
+              linkLabel?: T;
+              category?: T;
+              limit?: T;
+              id?: T;
+              blockName?: T;
+            };
+        faq?:
+          | T
+          | {
+              enabled?: T;
+              variant?: T;
+              headline?: T;
+              body?: T;
+              media?: T;
+              items?:
+                | T
+                | {
+                    title?: T;
+                    body?: T;
+                    media?: T;
+                    id?: T;
+                  };
+              link?: T;
+              linkLabel?: T;
+              questions?:
+                | T
+                | {
+                    question?: T;
+                    answer?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        callToAction?:
+          | T
+          | {
+              enabled?: T;
+              variant?: T;
+              headline?: T;
+              body?: T;
+              media?: T;
+              items?:
+                | T
+                | {
+                    title?: T;
+                    body?: T;
+                    media?: T;
+                    id?: T;
+                  };
+              link?: T;
+              linkLabel?: T;
+              secondaryLink?: T;
+              secondaryLinkLabel?: T;
+              id?: T;
+              blockName?: T;
+            };
+        communityShowcase?:
+          | T
+          | {
+              enabled?: T;
+              variant?: T;
+              headline?: T;
+              body?: T;
+              media?: T;
+              items?:
+                | T
+                | {
+                    title?: T;
+                    body?: T;
+                    media?: T;
+                    id?: T;
+                  };
+              link?: T;
+              linkLabel?: T;
+              gallery?:
+                | T
+                | {
+                    image?: T;
+                    caption?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+      };
+  categories?: T;
+  featured?: T;
+  description?: T;
+  caseStudy?: T;
+  gallery?:
+    | T
+    | {
+        image?: T;
+        id?: T;
+      };
+  seo?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "products_select".
+ */
+export interface ProductsSelect<T extends boolean = true> {
+  key?: T;
+  title?: T;
+  slug?: T;
+  reviewedLocales?: T;
+  excerpt?: T;
+  heroMedia?: T;
+  layout?:
+    | T
+    | {
+        hero?:
+          | T
+          | {
+              enabled?: T;
+              variant?: T;
+              headline?: T;
+              body?: T;
+              media?: T;
+              items?:
+                | T
+                | {
+                    title?: T;
+                    body?: T;
+                    media?: T;
+                    id?: T;
+                  };
+              link?: T;
+              linkLabel?: T;
+              secondaryLink?: T;
+              secondaryLinkLabel?: T;
+              id?: T;
+              blockName?: T;
+            };
+        richText?:
+          | T
+          | {
+              enabled?: T;
+              variant?: T;
+              headline?: T;
+              body?: T;
+              media?: T;
+              items?:
+                | T
+                | {
+                    title?: T;
+                    body?: T;
+                    media?: T;
+                    id?: T;
+                  };
+              link?: T;
+              linkLabel?: T;
+              content?: T;
+              id?: T;
+              blockName?: T;
+            };
+        imageText?:
+          | T
+          | {
+              enabled?: T;
+              variant?: T;
+              headline?: T;
+              body?: T;
+              media?: T;
+              items?:
+                | T
+                | {
+                    title?: T;
+                    body?: T;
+                    media?: T;
+                    id?: T;
+                  };
+              link?: T;
+              linkLabel?: T;
+              imagePosition?: T;
+              id?: T;
+              blockName?: T;
+            };
+        featureGrid?:
+          | T
+          | {
+              enabled?: T;
+              variant?: T;
+              headline?: T;
+              body?: T;
+              media?: T;
+              items?:
+                | T
+                | {
+                    title?: T;
+                    body?: T;
+                    media?: T;
+                    id?: T;
+                  };
+              link?: T;
+              linkLabel?: T;
+              columns?: T;
+              id?: T;
+              blockName?: T;
+            };
+        mediaShowcase?:
+          | T
+          | {
+              enabled?: T;
+              variant?: T;
+              headline?: T;
+              body?: T;
+              media?: T;
+              items?:
+                | T
+                | {
+                    title?: T;
+                    body?: T;
+                    media?: T;
+                    id?: T;
+                  };
+              link?: T;
+              linkLabel?: T;
+              gallery?:
+                | T
+                | {
+                    image?: T;
+                    caption?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        stats?:
+          | T
+          | {
+              enabled?: T;
+              variant?: T;
+              headline?: T;
+              body?: T;
+              media?: T;
+              items?:
+                | T
+                | {
+                    title?: T;
+                    body?: T;
+                    media?: T;
+                    id?: T;
+                  };
+              link?: T;
+              linkLabel?: T;
+              statistics?:
+                | T
+                | {
+                    value?: T;
+                    label?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        gallery?:
+          | T
+          | {
+              enabled?: T;
+              variant?: T;
+              headline?: T;
+              body?: T;
+              media?: T;
+              items?:
+                | T
+                | {
+                    title?: T;
+                    body?: T;
+                    media?: T;
+                    id?: T;
+                  };
+              link?: T;
+              linkLabel?: T;
+              gallery?:
+                | T
+                | {
+                    image?: T;
+                    caption?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        videoEmbed?:
+          | T
+          | {
+              enabled?: T;
+              variant?: T;
+              headline?: T;
+              body?: T;
+              media?: T;
+              items?:
+                | T
+                | {
+                    title?: T;
+                    body?: T;
+                    media?: T;
+                    id?: T;
+                  };
+              link?: T;
+              linkLabel?: T;
+              videoURL?: T;
+              poster?: T;
+              id?: T;
+              blockName?: T;
+            };
+        portfolioFeed?:
+          | T
+          | {
+              enabled?: T;
+              variant?: T;
+              headline?: T;
+              body?: T;
+              media?: T;
+              items?:
+                | T
+                | {
+                    title?: T;
+                    body?: T;
+                    media?: T;
+                    id?: T;
+                  };
+              link?: T;
+              linkLabel?: T;
+              category?: T;
+              limit?: T;
+              featuredOnly?: T;
+              id?: T;
+              blockName?: T;
+            };
+        newsFeed?:
+          | T
+          | {
+              enabled?: T;
+              variant?: T;
+              headline?: T;
+              body?: T;
+              media?: T;
+              items?:
+                | T
+                | {
+                    title?: T;
+                    body?: T;
+                    media?: T;
+                    id?: T;
+                  };
+              link?: T;
+              linkLabel?: T;
+              category?: T;
+              limit?: T;
+              id?: T;
+              blockName?: T;
+            };
+        faq?:
+          | T
+          | {
+              enabled?: T;
+              variant?: T;
+              headline?: T;
+              body?: T;
+              media?: T;
+              items?:
+                | T
+                | {
+                    title?: T;
+                    body?: T;
+                    media?: T;
+                    id?: T;
+                  };
+              link?: T;
+              linkLabel?: T;
+              questions?:
+                | T
+                | {
+                    question?: T;
+                    answer?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        callToAction?:
+          | T
+          | {
+              enabled?: T;
+              variant?: T;
+              headline?: T;
+              body?: T;
+              media?: T;
+              items?:
+                | T
+                | {
+                    title?: T;
+                    body?: T;
+                    media?: T;
+                    id?: T;
+                  };
+              link?: T;
+              linkLabel?: T;
+              secondaryLink?: T;
+              secondaryLinkLabel?: T;
+              id?: T;
+              blockName?: T;
+            };
+        communityShowcase?:
+          | T
+          | {
+              enabled?: T;
+              variant?: T;
+              headline?: T;
+              body?: T;
+              media?: T;
+              items?:
+                | T
+                | {
+                    title?: T;
+                    body?: T;
+                    media?: T;
+                    id?: T;
+                  };
+              link?: T;
+              linkLabel?: T;
+              gallery?:
+                | T
+                | {
+                    image?: T;
+                    caption?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+      };
+  overview?: T;
+  features?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        media?: T;
+        id?: T;
+      };
+  seo?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "postCategories_select".
+ */
+export interface PostCategoriesSelect<T extends boolean = true> {
+  key?: T;
+  label?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "portfolioCategories_select".
+ */
+export interface PortfolioCategoriesSelect<T extends boolean = true> {
+  key?: T;
+  label?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "media_select".
+ */
+export interface MediaSelect<T extends boolean = true> {
+  alt?: T;
+  caption?: T;
+  attribution?: T;
+  usage?: T;
+  approved?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "auditEvents_select".
+ */
+export interface AuditEventsSelect<T extends boolean = true> {
+  actor?: T;
+  actorIdSnapshot?: T;
+  actorRoleSnapshot?: T;
+  action?: T;
+  resource?: T;
+  resourceId?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "softwareReleases_select".
+ */
+export interface SoftwareReleasesSelect<T extends boolean = true> {
+  product?: T;
+  version?: T;
+  channel?: T;
+  publishedAt?: T;
+  changelog?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "releaseAssets_select".
+ */
+export interface ReleaseAssetsSelect<T extends boolean = true> {
+  release?: T;
+  os?: T;
+  architecture?: T;
+  storageKey?: T;
+  filename?: T;
+  sizeBytes?: T;
+  sha256?: T;
+  uploadStatus?: T;
+  visibility?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contactSubmissions_select".
+ */
+export interface ContactSubmissionsSelect<T extends boolean = true> {
+  name?: T;
+  email?: T;
+  message?: T;
+  locale?: T;
+  status?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "downloadEvents_select".
+ */
+export interface DownloadEventsSelect<T extends boolean = true> {
+  release?: T;
+  asset?: T;
+  os?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv_select".
  */
 export interface PayloadKvSelect<T extends boolean = true> {
@@ -278,6 +3482,202 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   batch?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "siteSettings".
+ */
+export interface SiteSetting {
+  id: number;
+  displayName?: string | null;
+  description?: string | null;
+  email?: string | null;
+  logo?: (number | null) | Media;
+  publicURL?: string | null;
+  socialLinks?:
+    | {
+        label: string;
+        url: string;
+        id?: string | null;
+      }[]
+    | null;
+  seo?: {
+    title?: string | null;
+    description?: string | null;
+  };
+  openGraphImage?: (number | null) | Media;
+  _status?: ('draft' | 'published') | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "companyProfile".
+ */
+export interface CompanyProfile {
+  id: number;
+  displayName?: string | null;
+  legalName?: string | null;
+  address?: string | null;
+  registrationIdentifiers?: string | null;
+  description?: string | null;
+  email?: string | null;
+  logo?: (number | null) | Media;
+  publicURL?: string | null;
+  phone?: string | null;
+  _status?: ('draft' | 'published') | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "headerNavigation".
+ */
+export interface HeaderNavigation {
+  id: number;
+  links?:
+    | {
+        label: string;
+        href: string;
+        id?: string | null;
+      }[]
+    | null;
+  _status?: ('draft' | 'published') | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "footerNavigation".
+ */
+export interface FooterNavigation {
+  id: number;
+  links?:
+    | {
+        label: string;
+        href: string;
+        id?: string | null;
+      }[]
+    | null;
+  _status?: ('draft' | 'published') | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contactSettings".
+ */
+export interface ContactSetting {
+  id: number;
+  displayName?: string | null;
+  description?: string | null;
+  email?: string | null;
+  logo?: (number | null) | Media;
+  publicURL?: string | null;
+  phone?: string | null;
+  address?: string | null;
+  _status?: ('draft' | 'published') | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "siteSettings_select".
+ */
+export interface SiteSettingsSelect<T extends boolean = true> {
+  displayName?: T;
+  description?: T;
+  email?: T;
+  logo?: T;
+  publicURL?: T;
+  socialLinks?:
+    | T
+    | {
+        label?: T;
+        url?: T;
+        id?: T;
+      };
+  seo?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+      };
+  openGraphImage?: T;
+  _status?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "companyProfile_select".
+ */
+export interface CompanyProfileSelect<T extends boolean = true> {
+  displayName?: T;
+  legalName?: T;
+  address?: T;
+  registrationIdentifiers?: T;
+  description?: T;
+  email?: T;
+  logo?: T;
+  publicURL?: T;
+  phone?: T;
+  _status?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "headerNavigation_select".
+ */
+export interface HeaderNavigationSelect<T extends boolean = true> {
+  links?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+        id?: T;
+      };
+  _status?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "footerNavigation_select".
+ */
+export interface FooterNavigationSelect<T extends boolean = true> {
+  links?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+        id?: T;
+      };
+  _status?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contactSettings_select".
+ */
+export interface ContactSettingsSelect<T extends boolean = true> {
+  displayName?: T;
+  description?: T;
+  email?: T;
+  logo?: T;
+  publicURL?: T;
+  phone?: T;
+  address?: T;
+  _status?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

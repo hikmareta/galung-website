@@ -47,6 +47,7 @@ test("operator-created administrator can sign in and log out", async ({
   page,
   request,
 }) => {
+  test.setTimeout(120000);
   const { getPayload } = await import("payload");
   const { default: config } = await import("../../src/payload.config");
   const payload = await getPayload({ config });
@@ -108,10 +109,48 @@ test("operator-created administrator can sign in and log out", async ({
     ).toBe(403);
     // The initialized state is covered separately from the empty-database scenario.
     await page.goto("/admin/login");
+    // Capture the empty form; never put credentials in a screenshot.
+    await page.screenshot({
+      path: "documentation/screenshots/phase-03-admin-login.png",
+      fullPage: true,
+    });
     await page.getByLabel("Email").fill(email);
     await page.getByLabel("Password", { exact: true }).fill(password);
     await page.getByRole("button", { name: "Login", exact: true }).click();
     await expect(page).toHaveURL(/\/admin$/);
+    for (const width of [375, 768, 1440]) {
+      await page.setViewportSize({ width, height: 1000 });
+      await page.evaluate(() => document.fonts.ready);
+      expect(
+        await page.evaluate(
+          () => document.documentElement.scrollWidth <= innerWidth,
+        ),
+      ).toBe(true);
+      await expect(page.locator("body")).toHaveCSS(
+        "font-family",
+        /Nunito Sans/,
+      );
+      await page.screenshot({
+        path: `documentation/screenshots/phase-03-admin-${width}.png`,
+        fullPage: true,
+      });
+    }
+    await page.goto("/admin/collections/users");
+    await expect(
+      page.getByRole("heading", { name: "Users", exact: true }),
+    ).toBeVisible();
+    await page.screenshot({
+      path: "documentation/screenshots/phase-03-admin-users.png",
+      fullPage: true,
+    });
+    await page.goto(`/admin/collections/users/${admin.id}`);
+    await expect(page.getByRole("textbox", { name: /^Name/ })).toHaveValue(
+      "Browser test",
+    );
+    await page.screenshot({
+      path: "documentation/screenshots/phase-03-admin-edit.png",
+      fullPage: true,
+    });
     const cookie = (await page.context().cookies()).find(
       (item) => item.name === "payload-token",
     );
@@ -145,9 +184,7 @@ test("operator-created administrator can sign in and log out", async ({
   }
 });
 
-test("narrow sample layout and keyboard locale navigation", async ({
-  page,
-}) => {
+test("narrow sample layout and mouse locale navigation", async ({ page }) => {
   await page.setViewportSize({ width: 320, height: 740 });
   await page.goto("/id");
   expect(
@@ -155,14 +192,42 @@ test("narrow sample layout and keyboard locale navigation", async ({
       () => document.documentElement.scrollWidth <= window.innerWidth,
     ),
   ).toBe(true);
-  await page.keyboard.press("Tab");
-  await expect(
-    page.getByRole("link", { name: "Bahasa Indonesia", exact: true }),
-  ).toBeFocused();
-  await page.keyboard.press("Tab");
-  await expect(
-    page.getByRole("link", { name: "English", exact: true }),
-  ).toBeFocused();
-  await page.keyboard.press("Enter");
+  await page.getByRole("button", { name: "Buka menu" }).click();
+  await page.getByRole("link", { name: "English", exact: true }).click();
   await expect(page.locator("html")).toHaveAttribute("lang", "en");
+});
+
+test("mobile keyboard language switching works in both directions", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 375, height: 900 });
+  await page.goto("/id");
+  await page.keyboard.press("Tab");
+  await expect(page.locator(".skip-link")).toBeFocused();
+  await page.keyboard.press("Tab");
+  await expect(
+    page.getByRole("link", { name: "Galung", exact: true }),
+  ).toBeFocused();
+  await page.keyboard.press("Tab");
+  await expect(page.locator(".menu-toggle")).toBeFocused();
+  for (const [language, locale] of [
+    ["English", "en"],
+    ["Bahasa Indonesia", "id"],
+  ] as const) {
+    const toggle = page.locator(".menu-toggle");
+    // The locale route may remount the shell; always begin from its native trigger.
+    await toggle.focus();
+    if ((await toggle.getAttribute("aria-expanded")) === "false")
+      await page.keyboard.press("Enter");
+    const target = page.getByRole("link", { name: language, exact: true });
+    for (let tabs = 0; tabs < 8; tabs++) {
+      await page.keyboard.press("Tab");
+      if (await target.evaluate((node) => node === document.activeElement))
+        break;
+    }
+    await expect(target).toBeFocused();
+    await page.keyboard.press("Enter");
+    await expect(page).toHaveURL(`/${locale}`);
+    await expect(page.locator("html")).toHaveAttribute("lang", locale);
+  }
 });

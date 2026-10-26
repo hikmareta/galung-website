@@ -29,3 +29,15 @@ Continue website MVP work using placeholders for TBD business data; do not imple
 - End phase 04: real admin can change a homepage text/image and block order in both locales without code edits.
 - End phase 06: release upload verified, download anonymous, app server never streams installer bytes.
 - End phase 08: deployment smoke tests, rollback, access control and backups checked.
+
+## Current Phase 03 gate — 26 October 2026
+Phase 03 was explicitly activated and implemented. PHASE-03-CLOSURE.md supersedes the historical PARTIAL review: P03-R1–R6 are closed and the local Phase 03 gate is PASS after regression and visual verification. Prior Phase 02 closure remains historical foundation evidence. Do not automatically advance to Phase 04.
+
+## Initial Phase 04 gate — 26 October 2026 (historical)
+User explicitly activated Phase 04. The initial report recorded local PASS, superseded by the fresh PARTIAL review below. Historical evidence: complete integration suite, 11 unit tests, 27 browser tests, strict typecheck/lint/build, migration rollback/reapply/restore and backed-up working local DB migration. See PHASE-04-CMS.md and PHASE-04-EVALUATION.md for exact scope, actual evidence and production follow-ups. This supersedes the historical Phase 03-only progress status; do not automatically start Phase 05.
+
+## Fresh Phase 04 review — 26 October 2026 (historical)
+The review changed the initial PASS to PARTIAL. PHASE-04-REVIEW.md records two reproduced HIGH media findings plus localized readiness, audit attribution and schema-contract gaps. The remediation below supersedes that historical verdict; earlier green tests did not cover these defects.
+
+## Current Phase 04 closure — 26 October 2026
+**Local gate PASS; Phase 04 closed.** User-authorized remediation closes P04-R1–R5. PHASE-04-CLOSURE.md executes the phase evaluation prompt and records 16 unit tests, full integration plus adversarial regressions, four-migration rollback/reapply/restore, clean lint/typecheck/format/build, dependency audit and 28 browser tests passing. Native editor/publisher flows at 375/1280 verify ID/EN text/image/shared order, private preview, document-lock takeover, publication, anonymous visible images and warmed cache invalidation. Working local DB migrated after backup. PHASE-04-SCHEMA-MAP.md is the current editorial runbook. Production storage/CDN, approved content/legal facts and later public pages keep their own gates. Do not automatically start Phase 05.
