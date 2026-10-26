@@ -4,7 +4,7 @@
 
 **Gate: PASS for the local Phase 02 foundation.** Acceptance checks below pass after remediation. This
 report supersedes the original implementation PASS and subsequent PARTIAL review.
-Git delivery and hosted CI observations are recorded separately below; no production
+Git delivery and successful hosted CI observations are recorded below; no production
 readiness, WCAG certification or deployment is claimed. Phase 03 has not started.
 
 Reviewed before changes: AGENTS.md, README.md, documentation/02, 04, 06, 07, 08,
@@ -37,7 +37,7 @@ and user-authorized initial commit/push. Existing product and legal TBDs are unc
 | pnpm manifest/lockfile reproducibility | PASS | Frozen installation includes patch hash and scoped overrides |
 | Formatting/lint/strict TS/unit/build | PASS | Fresh checks and six unit tests |
 | CI skeleton | PASS | Same database/integration/audit/build/browser commands, disposable service, no deployment |
-| Hosted CI | NOT TESTED until remote run completes | See delivery observations; never inferred from local checks |
+| Hosted CI | PASS | GitHub Actions run 40259752751 completed successfully on Ubuntu for b306ccf; all steps including browser tests succeeded |
 | Production hardening / full product AT-01–12 | NOT TESTED / later phases | Boundary assessment defines owners; sample locale/noindex is only partial product evidence |
 
 ## Architectural changes and file inventory
@@ -82,7 +82,8 @@ overrideAccess in test calls; both were corrected before final checks.
 | Existing preview server tests | 10 pass, 0 fail |
 | Existing preview generator tests under PowerShell 7 | 5 pass |
 | Secret-pattern review | No private-key/PAT/AWS-key match in intended source files; .env, .tools, node_modules and outputs excluded |
-| Git identity / remote inspection | Local identity set from user instruction; origin is the authorized hikmareta/galung-website repository |
+| Git identity / remote inspection | Local identity set from user instruction; commits pushed to authorized origin/master; remote b306ccf65df7a55a8b79348f513734368d1b58f9 matched local HEAD at verification |
+| Hosted GitHub Actions | Run 40259752751 completed success: frozen install, format/lint/generation/typecheck, six unit tests, database/backup/integration, clean audit, build, Chromium and browser suite all succeeded |
 | Existing-development-admin sentinel proof | Both integration and browser suites pass with the sentinel unchanged; fixture removed afterward. Final dev user count 0 and no galung_test databases remain |
 
 Initial staging also exposed trailing whitespace in archived text/notices and
@@ -119,13 +120,24 @@ The intended baseline includes original planning/reference assets, application,
 tests, patch, documentation and lockfile. Secrets/local runtimes/test output are
 excluded. Remote: https://github.com/hikmareta/galung-website.git.
 Initial commit: 5962ae8, authored with the user-provided identity, includes the
-lockfile and complete reviewed baseline. Push and hosted workflow observations
-will be recorded after execution; a queued workflow is not treated as a pass.
+lockfile and complete reviewed baseline. Follow-up b306ccf finalizes evidence and
+normalizes archived/generated whitespace. Both were pushed successfully to master;
+git ls-remote confirmed b306ccf65df7a55a8b79348f513734368d1b58f9 on origin/master.
+Local Git status was clean; .env/.tools/node_modules/.next/test-results were absent
+from tracked files, and staged secret-value scanning found no local secrets.
+
+Hosted verification: [Foundation checks run 40259752751](https://github.com/hikmareta/galung-website/actions/runs/40259752751)
+completed with conclusion success on the exact b306ccf source. This is independent
+Ubuntu execution, not an inference from the local Windows run. Documentation-only
+follow-ups record that observed outcome without altering tested application behavior.
 
 ## Next scope
 
 No unresolved implementation defect from R01–R05 remains after these regression
-checks. Complete Git delivery/hosted verification observations before the final
-handover. No phase advances automatically. Recommended next work, when authorized:
+checks. Git delivery and hosted verification are complete for the tested source.
+There is no remaining BLOCKER/HIGH/MEDIUM defect within the Phase 02 gate. The
+production obligations in the security-boundary document are later release gates,
+not claims of implemented production controls. No phase advances automatically.
+Recommended next work, when authorized:
 Phase 03 approved tokens/fonts, responsive shell and accessible primitives. Later
 security, content lifecycle, download, legal and hosting gates remain unchanged.
