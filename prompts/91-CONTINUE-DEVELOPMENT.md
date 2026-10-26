@@ -1,0 +1,3 @@
+# Continue Galung Website Development
+
+Read the latest repository, `AGENTS.md`, roadmap, decision register and previous phase assessment. Identify the earliest incomplete approved milestone. Implement ONLY its next cohesive set of tasks, starting with a concise plan. Continue development even though company identity, pricing/license commercial terms, or production hosting remain TBD; use safe editable placeholders and clearly document what requires approval before public launch. **Do not fabricate legal data or add checkout/pricing/licensing/customer portal.** Preserve compatible architectural patterns; run real checks; update docs and report exact results and blockers. When a phase is complete, produce an evaluation using `prompts/90-PHASE-EVALUATION.md`.

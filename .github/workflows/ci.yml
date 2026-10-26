@@ -1,0 +1,48 @@
+name: Foundation checks
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:17.10-alpine
+        env:
+          POSTGRES_USER: galung
+          POSTGRES_PASSWORD: ci-only-password
+          POSTGRES_DB: galung
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U galung -d galung"
+          --health-interval 5s --health-timeout 5s --health-retries 20
+    env:
+      DATABASE_URL: postgresql://galung:ci-only-password@localhost:5432/galung
+      PAYLOAD_SECRET: ci-only-disposable-secret-not-for-production-123456
+      NEXT_PUBLIC_SITE_URL: http://localhost:3000
+      NEXT_TELEMETRY_DISABLED: "1"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.34.9
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .node-version
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: node -e "require('fs').writeFileSync('.env', '')"
+      - run: pnpm format:check
+      - run: pnpm lint
+      - run: pnpm generate:types
+      - run: pnpm generate:importmap
+      - run: pnpm typecheck
+      - run: pnpm test
+      - run: pnpm test:database
+        env:
+          TEST_POSTGRES_CONTAINER: ${{ job.services.postgres.id }}
+      - run: pnpm test:integration
+      - run: pnpm audit --audit-level low
+      - run: pnpm build
+      - run: pnpm exec playwright install --with-deps chromium
+      - run: pnpm test:e2e

@@ -1,0 +1,138 @@
+{
+  "encoder": "Pillow 12.3.0",
+  "format": "WebP",
+  "quality": 82,
+  "images": [
+    {
+      "name": "hero",
+      "source": "assets/hero-generated-v2.png",
+      "sourceBytes": 2023876,
+      "variants": [
+        {
+          "path": "assets/optimized/hero-v3-640.webp",
+          "width": 640,
+          "height": 291,
+          "bytes": 34408,
+          "sha256": "b21f2f29984a19e89e397af7bd545b71cda17177057c340687441e3e0dc613b0"
+        },
+        {
+          "path": "assets/optimized/hero-v3-960.webp",
+          "width": 960,
+          "height": 437,
+          "bytes": 60908,
+          "sha256": "e5421ff77af192828b77bba7bdda24532f7d38d956a98e59c88ef72b70d1df39"
+        },
+        {
+          "path": "assets/optimized/hero-v3-1280.webp",
+          "width": 1280,
+          "height": 582,
+          "bytes": 89974,
+          "sha256": "413c6aebdfafbac717dc974cc5f34ff3058b24c23ff5be633ce4404a1a6d1dba"
+        },
+        {
+          "path": "assets/optimized/hero-v3-1860.webp",
+          "width": 1860,
+          "height": 846,
+          "bytes": 147666,
+          "sha256": "c0e817536c4a0e3dc9a6a7055f403bdf7b143e1e71d012c391aa212f9c332342"
+        }
+      ]
+    },
+    {
+      "name": "laptop",
+      "source": "assets/laptop-generated-v2.png",
+      "sourceBytes": 2163804,
+      "variants": [
+        {
+          "path": "assets/optimized/laptop-v3-480.webp",
+          "width": 480,
+          "height": 320,
+          "bytes": 34084,
+          "sha256": "ad360ebe411cea5cdcbeb707962531d869b77a4ef673a458f3ea0343b8360892"
+        },
+        {
+          "path": "assets/optimized/laptop-v3-768.webp",
+          "width": 768,
+          "height": 512,
+          "bytes": 66254,
+          "sha256": "4c1e7f0bcbf1b4bfd8d7a75d83b294fb0cb97a982b921602b2b48445adae24ef"
+        },
+        {
+          "path": "assets/optimized/laptop-v3-1024.webp",
+          "width": 1024,
+          "height": 683,
+          "bytes": 97464,
+          "sha256": "424a04fd3290f370e3b16cf55860d5659677aa0024433b751e2188e8e39db440"
+        },
+        {
+          "path": "assets/optimized/laptop-v3-1536.webp",
+          "width": 1536,
+          "height": 1024,
+          "bytes": 163978,
+          "sha256": "adfd925713403341de2a599034fb69b620c5b9e9f546370294e9011789104634"
+        }
+      ]
+    },
+    {
+      "name": "community",
+      "source": "assets/community-generated-v2.png",
+      "sourceBytes": 2212715,
+      "variants": [
+        {
+          "path": "assets/optimized/community-v3-640.webp",
+          "width": 640,
+          "height": 256,
+          "bytes": 36994,
+          "sha256": "893fba863f28211889b1017eec6dfc0eca952d1d499e9ddb34f9c9feb7717425"
+        },
+        {
+          "path": "assets/optimized/community-v3-960.webp",
+          "width": 960,
+          "height": 384,
+          "bytes": 72612,
+          "sha256": "8506b84d59f720600e5ce42aef607d0df6d9fce26f0f65a13bb64bb7202ddaf8"
+        },
+        {
+          "path": "assets/optimized/community-v3-1280.webp",
+          "width": 1280,
+          "height": 512,
+          "bytes": 112532,
+          "sha256": "f7a268b600a8b1b1f6f59deb4c6ef4250176a5e5fe5312a38c2301f99d4b98ce"
+        },
+        {
+          "path": "assets/optimized/community-v3-1983.webp",
+          "width": 1983,
+          "height": 793,
+          "bytes": 201994,
+          "sha256": "8062480ad28ab0b292145423f319d512d0832e5512a55c591e19e98dc5c472b4"
+        }
+      ]
+    }
+  ],
+  "largestImageSetBytes": 513638,
+  "fonts": [
+    {
+      "path": "assets/fonts/nunito-sans-400-700-latin.woff2",
+      "bytes": 31076,
+      "sha256": "29e3890496844a9ea81975c52771c587c872b4eb317026422d1995b88d21b57d"
+    },
+    {
+      "path": "assets/fonts/poppins-400-latin.woff2",
+      "bytes": 7884,
+      "sha256": "7d93459d86585bfcdbb7e0376056226adb25821ee54b96236fe2123e9560929f"
+    },
+    {
+      "path": "assets/fonts/poppins-600-latin.woff2",
+      "bytes": 8000,
+      "sha256": "f4e80d9dfd374d02989b87a27b5ed4cb78fbb177c27f1478e9a8b0afb7513149"
+    },
+    {
+      "path": "assets/fonts/poppins-700-latin.woff2",
+      "bytes": 7816,
+      "sha256": "9338e65fc077355c7a87ae0d64cc101e23b9bf8ad78ae65f0f319c857311b526"
+    }
+  ],
+  "fontBytes": 54776,
+  "largestImageAndFontSetBytes": 568414,
+  "archivedSourceSetBytes": 7177155
+}

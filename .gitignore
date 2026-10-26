@@ -1,0 +1,30 @@
+# Local environment and credentials
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+.aws/
+# Application/build dependencies and test output
+node_modules/
+.tools/
+*.tsbuildinfo
+.next/
+out/
+dist/
+coverage/
+playwright-report/
+test-results/
+__pycache__/
+*.pyc
+*.log
+# Preview checks use self-cleaning local fixtures
+references/content-preview/tests/.tmp-*/
+# Installer binaries belong in object storage, not source control
+*.exe
+*.msi
+*.dmg
+*.pkg
+# OS/editor noise
+.DS_Store
+Thumbs.db

@@ -1,0 +1,41 @@
+[
+  {
+    "file": "hero-generated-v2.png",
+    "reference": "references/UI Galung.jpg, visual direction only",
+    "factualProductScreenshot": false,
+    "documentaryPhoto": false,
+    "status": "synthetic conceptual illustration, draft",
+    "bytes": 2023876,
+    "created": "2026-10-25",
+    "sha256": "59220FA946CA7AAED8F0BED1AB80646E9983BB5655F43585FAE87A1D91044AE1",
+    "mode": "built-in image_gen",
+    "archivedSource": true,
+    "runtimeDerivativesManifest": "references/content-preview/assets/optimized/manifest.json"
+  },
+  {
+    "file": "laptop-generated-v2.png",
+    "reference": "references/UI Galung.jpg, visual direction only",
+    "factualProductScreenshot": false,
+    "documentaryPhoto": false,
+    "status": "synthetic conceptual illustration, draft",
+    "bytes": 2163804,
+    "created": "2026-10-25",
+    "sha256": "4EA89D085E2FFECFC40FFDB1B016E960A39D12FD134B160C2F1D8CFD7D905A3F",
+    "mode": "built-in image_gen",
+    "archivedSource": true,
+    "runtimeDerivativesManifest": "references/content-preview/assets/optimized/manifest.json"
+  },
+  {
+    "file": "community-generated-v2.png",
+    "reference": "references/UI Galung.jpg, visual direction only",
+    "factualProductScreenshot": false,
+    "documentaryPhoto": false,
+    "status": "synthetic conceptual illustration, draft",
+    "bytes": 2212715,
+    "created": "2026-10-25",
+    "sha256": "1F5DDBC06A6DE5D26818372F6C1321CBC0283FAD2DAF4463D16C4248888D1E6A",
+    "mode": "built-in image_gen",
+    "archivedSource": true,
+    "runtimeDerivativesManifest": "references/content-preview/assets/optimized/manifest.json"
+  }
+]

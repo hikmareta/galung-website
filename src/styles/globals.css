@@ -1,0 +1,15 @@
+@import "tailwindcss";
+body {
+  margin: 0;
+  background: #faf7f0;
+  color: #242820;
+  font-family: system-ui, sans-serif;
+}
+a {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+a:focus-visible {
+  outline: 3px solid #073e32;
+  outline-offset: 5px;
+}

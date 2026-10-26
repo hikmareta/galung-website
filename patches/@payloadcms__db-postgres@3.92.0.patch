@@ -1,0 +1,30 @@
+diff --git a/dist/connect.js b/dist/connect.js
+index bf4beedd6617e13dbafab75c82f356095ffa4e5f..9784c0fc1ab356b28c88025ade111ce25c1c8947 100644
+--- a/dist/connect.js
++++ b/dist/connect.js
+@@ -35,6 +35,8 @@ const connectWithReconnect = async function({ adapter, pool, reconnect = false }
+         // swallow error
+         }
+     });
++    // The health-check connection must return to the pool after listener setup.
++    result.release();
+ };
+ export const connect = async function connect(options = {
+     hotReload: false
+diff --git a/dist/index.js b/dist/index.js
+index 6cc7f790151cda72cbb29b545c9660071f3b1bde..1ea0e6decf4f3fb8528d96c026062e00b8ee9964 100644
+--- a/dist/index.js
++++ b/dist/index.js
+@@ -111,7 +111,11 @@ export function postgresAdapter(args) {
+             deleteOne,
+             deleteVersions,
+             deleteWhere,
+-            destroy,
++            destroy: async function () {
++                await destroy.call(this);
++                await this.pool?.end();
++                this.pool = undefined;
++            },
+             dropDatabase,
+             execute,
+             find,

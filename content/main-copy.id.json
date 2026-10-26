@@ -1,0 +1,208 @@
+{
+  "locale": "id",
+  "status": "draft-for-review",
+  "reviewedTranslation": false,
+  "home": {
+    "eyebrow": "MUSIK VISUAL, SEMANGAT KEBERSAMAAN",
+    "title": "Musik melampaui bunyi.",
+    "intro": "Galung mempertemukan angklung dan pendekatan musik visual dalam satu gagasan: pengalaman bermusik yang lebih terbuka.",
+    "primaryCta": "Jelajahi Galung",
+    "secondaryCta": "Informasi unduhan",
+    "statementTitle": "Berangkat dari angklung. Tumbuh bersama kemungkinan baru.",
+    "statementBody": "Kami ingin membawa semangat angklung ke ruang eksplorasi digital, tanpa meninggalkan nilai yang membuatnya berarti: saling mendengarkan, mengambil peran, dan bermain bersama.",
+    "pillars": [
+      {
+        "title": "Berakar pada tradisi",
+        "body": "Angklung menjadi titik berangkat untuk mengenal hubungan antara bunyi, gerak, dan kebersamaan."
+      },
+      {
+        "title": "Mengeksplorasi musik visual",
+        "body": "Galung mengangkat pendekatan visual sebagai arah pengembangan pengalaman bermusik."
+      },
+      {
+        "title": "Menjaga kebersamaan",
+        "body": "Semangat bermain bersama menjadi nilai yang ingin kami hadirkan dalam perjalanan Galung."
+      }
+    ],
+    "productTitle": "Satu nama. Satu perjalanan: Galung.",
+    "productBody": "Kenali gagasan di balik Galung, arah pengembangannya, dan informasi rilis yang akan menyertai perangkat lunaknya.",
+    "heritageTitle": "Setiap bunyi berawal dari sebuah cerita.",
+    "heritageBody": "Dari tangan yang merawat bambu hingga kelompok yang memainkannya, angklung mengajak kita melihat musik sebagai pertemuan antara keterampilan dan kebersamaan. Semangat inilah yang menginspirasi arah Galung.",
+    "closingTitle": "Mari membuka ruang untuk bermusik.",
+    "closingBody": "Kenali Galung lebih dekat dan ikuti informasi pengembangannya melalui website ini.",
+    "titleLead": "Musik melampaui",
+    "titleAccent": "bunyi."
+  },
+  "pages": {
+    "about": {
+      "title": "Tradisi sebagai titik berangkat.",
+      "intro": "Galung adalah perangkat lunak musik dengan arah pengembangan yang berfokus pada angklung, musik visual, dan semangat pembelajaran yang lebih terbuka.",
+      "body": "Bagi kami, perkembangan teknologi adalah kesempatan untuk mengeksplorasi cara baru mendekati musik. Galung tumbuh dari keinginan untuk mempertemukan warisan musikal dengan pengalaman digital, sambil menjaga semangat kebersamaan di dalamnya."
+    },
+    "software": {
+      "title": "Kenali Galung.",
+      "intro": "Satu perangkat lunak, dengan angklung dan musik visual sebagai titik berangkat.",
+      "body": "Halaman ini menjadi tempat untuk mengenal Galung lebih dekat: dari gagasan pengembangan hingga panduan penggunaan dan informasi rilis. Rincian kemampuan akan dijelaskan berdasarkan fitur yang telah diverifikasi."
+    },
+    "features": {
+      "title": "Mengenal pengalaman Galung.",
+      "intro": "Informasi yang jelas membantu Anda mengenal perangkat lunak sebelum menggunakannya.",
+      "body": "Rincian fitur, tampilan aplikasi, serta panduan penggunaan akan ditampilkan setelah peninjauan produk selesai. Kami tidak mencantumkan kemampuan yang belum dikonfirmasi."
+    },
+    "portfolio": {
+      "title": "Cerita dari ruang bermusik.",
+      "intro": "Ruang untuk berbagi dokumentasi kegiatan dan proyek yang berkaitan dengan Galung.",
+      "body": "Belum ada proyek yang dipublikasikan. Dokumentasi akan ditambahkan setelah informasi dan izin publikasinya lengkap."
+    },
+    "news": {
+      "title": "Kabar dari Galung.",
+      "intro": "Ikuti informasi pengembangan, pengumuman, dan catatan perjalanan Galung.",
+      "body": "Belum ada berita yang dipublikasikan. Kunjungi kembali halaman ini untuk membaca kabar berikutnya."
+    },
+    "download": {
+      "title": "Mulai dari unduhan yang tepat.",
+      "intro": "Pilih berkas Galung yang sesuai dengan sistem operasi komputer Anda ketika rilis terverifikasi tersedia.",
+      "body": "Berkas unduhan belum tersedia pada pratinjau ini. Nomor versi, arsitektur, ukuran berkas, kebutuhan sistem, dan catatan rilis akan menyertai setiap rilis yang telah disetujui.",
+      "windowsStatus": "Berkas Windows belum tersedia",
+      "macStatus": "Berkas macOS belum tersedia"
+    },
+    "contact": {
+      "title": "Mari mulai percakapan.",
+      "intro": "Punya pertanyaan tentang Galung atau ingin membicarakan peluang kolaborasi?",
+      "body": "Kanal kontak resmi sedang disiapkan. Informasi kontak akan ditampilkan setelah dikonfirmasi."
+    }
+  },
+  "faq": [
+    {
+      "question": "Apa itu Galung?",
+      "answer": "Galung adalah perangkat lunak musik dengan arah pengembangan yang berfokus pada angklung dan pendekatan musik visual."
+    },
+    {
+      "question": "Apakah perlu akun untuk mengunduh?",
+      "answer": "Tidak. Unduhan publik Galung direncanakan tersedia tanpa login ketika rilis terverifikasi dipublikasikan."
+    },
+    {
+      "question": "Sistem operasi apa yang dituju?",
+      "answer": "Windows dan macOS. Versi minimum sistem operasi serta arsitektur yang didukung akan mengikuti informasi rilis resmi."
+    }
+  ],
+  "seo": {
+    "home": {
+      "title": "Galung — Angklung dan Musik Visual",
+      "description": "Kenali Galung, gagasan yang mempertemukan angklung, musik visual, dan semangat kebersamaan. Temukan informasi produk dan pengembangannya."
+    },
+    "about": {
+      "title": "Tentang Galung — Tradisi dan Eksplorasi Digital",
+      "description": "Kenali gagasan di balik Galung dan arah pengembangannya dalam mempertemukan angklung dengan pendekatan musik visual."
+    },
+    "software": {
+      "title": "Perangkat Lunak Galung",
+      "description": "Kenali Galung dan temukan informasi produk, arah pengembangan, serta rilis perangkat lunak."
+    },
+    "features": {
+      "title": "Fitur Galung",
+      "description": "Informasi fitur, tampilan, dan panduan Galung akan tersedia setelah peninjauan produk."
+    },
+    "portfolio": {
+      "title": "Portofolio Galung",
+      "description": "Ruang dokumentasi proyek dan kegiatan Galung yang telah disetujui untuk dipublikasikan."
+    },
+    "news": {
+      "title": "Kabar Galung",
+      "description": "Informasi pengembangan, pengumuman, dan catatan perjalanan Galung."
+    },
+    "download": {
+      "title": "Unduh Galung — Windows dan macOS",
+      "description": "Informasi unduhan Galung untuk Windows dan macOS, kebutuhan sistem, serta catatan rilis resmi."
+    },
+    "contact": {
+      "title": "Hubungi Galung",
+      "description": "Informasi kanal resmi untuk pertanyaan dan peluang kolaborasi bersama Galung."
+    }
+  },
+  "ui": {
+    "text_galung_pratinjau_visual_referensi": "Galung — Pratinjau Visual Referensi",
+    "text_langsung_ke_konten": "Langsung ke konten",
+    "text_pratinjau_desain_konten_draf_ilustrasi_konseptual_ai": "PRATINJAU DESAIN · KONTEN DRAF · ILUSTRASI KONSEPTUAL AI",
+    "text_galung": "Galung",
+    "text_software": "Software",
+    "text_fitur": "Fitur",
+    "text_portofolio": "Portofolio",
+    "text_tentang": "Tentang",
+    "text_kabar": "Kabar",
+    "text_unduh_galung": "Unduh Galung",
+    "text_lihat_visual": "Lihat visual",
+    "text_berbeda_cara": "Berbeda cara.",
+    "text_satu_musik": "Satu musik.",
+    "text_nilai_dan_arah_galung": "Nilai dan arah Galung",
+    "text_kebersamaan": "Kebersamaan",
+    "text_semangat_bermusik": "Semangat bermusik",
+    "text_dan_bertumbuh_bersama": "dan bertumbuh bersama.",
+    "text_musik_visual": "Musik visual",
+    "text_arah_eksplorasi": "Arah eksplorasi",
+    "text_pengalaman_musikal": "pengalaman musikal.",
+    "text_kolaborasi": "Kolaborasi",
+    "text_terinspirasi_dari": "Terinspirasi dari",
+    "text_semangat_ansambel": "semangat ansambel.",
+    "text_warisan_budaya": "Warisan budaya",
+    "text_berangkat_dari_angklung": "Berangkat dari angklung",
+    "text_dan_tradisi_indonesia": "dan tradisi Indonesia.",
+    "text_visual_hero_merupakan_ilustrasi_ai_layar_bukan": "Visual hero merupakan ilustrasi AI; layar bukan tangkapan aplikasi asli.",
+    "text_perangkat_lunak_galung": "PERANGKAT LUNAK GALUNG",
+    "text_satu_galung_banyak_inspirasi_bermusik": "Satu Galung. Banyak inspirasi bermusik.",
+    "text_dari_akar_tradisi_menuju_eksplorasi_musik_visual": "Dari akar tradisi menuju eksplorasi musik visual.",
+    "text_kenali_galung": "Kenali Galung",
+    "text_satu_perangkat_lunak_galung": "Satu perangkat lunak Galung",
+    "text_arah_pengembangan_musik_visual": "Arah pengembangan musik visual",
+    "text_kenali_lebih_dekat": "Kenali lebih dekat",
+    "text_musik_tradisi": "Musik & tradisi",
+    "text_angklung_menjadi_inspirasi_untuk_menjelajahi_hubungan_antara": "Angklung menjadi inspirasi untuk menjelajahi hubungan antara bunyi, gerak, dan kebersamaan.",
+    "text_warisan_sebagai_inspirasi": "Warisan sebagai inspirasi",
+    "text_semangat_bermain_bersama": "Semangat bermain bersama",
+    "text_terbuka_pada_kemungkinan_baru": "Terbuka pada kemungkinan baru",
+    "text_cerita_di_balik_galung": "Cerita di balik Galung",
+    "text_kedua_kartu_memperkenalkan_satu_produk_dan_inspirasinya": "Kedua kartu memperkenalkan satu produk dan inspirasinya. Seluruh visual AI bersifat konseptual, bukan bukti fitur atau kegiatan nyata.",
+    "text_kenali_galung_lebih_dekat": "Kenali Galung lebih dekat",
+    "text_mulai_dari_sini": "MULAI DARI SINI",
+    "text_1": "1",
+    "text_jelajahi_gagasannya": "Jelajahi gagasannya",
+    "text_kenali_galung_dan_inspirasi_di_balik_pengembangannya": "Kenali Galung dan inspirasi di balik pengembangannya.",
+    "text_2": "2",
+    "text_temukan_informasi_produk": "Temukan informasi produk",
+    "text_baca_rincian_fitur_ketika_informasinya_telah_diverifikasi": "Baca rincian fitur ketika informasinya telah diverifikasi.",
+    "text_3": "3",
+    "text_ikuti_informasi_rilis": "Ikuti informasi rilis",
+    "text_unduh_tanpa_login_saat_berkas_resmi_tersedia": "Unduh tanpa login saat berkas resmi tersedia.",
+    "text_tumbuh_bersama_melalui_musik": "Tumbuh bersama melalui musik.",
+    "text_tradisi_hidup": "Tradisi hidup.",
+    "text_inspirasi_baru": "Inspirasi baru.",
+    "text_semangat_kebersamaan_yang_menginspirasi_galung": "Semangat kebersamaan yang menginspirasi Galung.",
+    "text_ilustrasi_panggung_dibuat_dengan_ai_bukan_acara": "Ilustrasi panggung dibuat dengan AI; bukan acara atau testimoni pengguna Galung.",
+    "text_tentang_galung": "TENTANG GALUNG",
+    "text_portofolio_2": "PORTOFOLIO",
+    "text_kabar_2": "KABAR",
+    "text_unduhan_galung": "UNDUHAN GALUNG",
+    "text_windows": "Windows",
+    "text_macos": "macOS",
+    "text_kontak": "KONTAK",
+    "text_draf_bahasa_indonesia_terjemahan_inggris_menunggu_peninjauan": "Draf bahasa Indonesia · Terjemahan Inggris menunggu peninjauan.",
+    "text_identitas_perusahaan_dan_kebijakan_legal_belum_diterbitkan": "Identitas perusahaan dan kebijakan legal belum diterbitkan.",
+    "text_tentang_visual_dan_kredit_foto": "Tentang visual dan kredit foto",
+    "text_hero_laptop_konseptual_dan_panggung_dibuat_dengan": "Hero, laptop konseptual dan panggung dibuat dengan ImageGen atas arahan pengguna, mengikuti suasana referensi. Semua tokoh dan kegiatan merupakan ilustrasi sintetis. Tampilan layar tidak menunjukkan fitur aplikasi yang telah diverifikasi. Ikon serta ornamen bambu dibuat sebagai SVG orisinal untuk pratinjau; wordmark belum merupakan logo final.",
+    "text_foto_commons_dari_versi_awal_disimpan_dalam": "Foto Commons dari versi awal disimpan dalam arsip aset dan tidak lagi ditampilkan:",
+    "text_marcellinohanarko": "Marcellinohanarko",
+    "text_dan": "dan",
+    "text_galeri_ega": "Galeri ega",
+    "text_cc_by_sa_4_0": "CC BY-SA 4.0",
+    "text_midori": "Midori",
+    "text_cc_by_3_0": "CC BY 3.0",
+    "text_galung_beranda": "Galung, beranda",
+    "text_navigasi_pratinjau": "Navigasi pratinjau",
+    "text_ilustrasi_ai_konduktor_perempuan_memimpin_ansambel_angklung": "Ilustrasi AI konduktor perempuan memimpin ansambel angklung di ruang bambu dengan layar musik visual konseptual.",
+    "text_ilustrasi_ai_laptop_dengan_konsep_musik_visual": "Ilustrasi AI laptop dengan konsep musik visual hijau dan emas di samping instrumen bambu.",
+    "text_detail_ilustrasi_ai_ansambel_angklung_bukan_dokumentasi": "Detail ilustrasi AI ansambel angklung; bukan dokumentasi kegiatan Galung.",
+    "text_ilustrasi_ai_ansambel_angklung_di_panggung_dengan": "Ilustrasi AI ansambel angklung di panggung dengan pencahayaan hangat, bukan dokumentasi acara nyata.",
+    "text_baca_gagasan_galung": "Baca gagasan Galung",
+    "text_pratinjau_desain_galung_dengan_ilustrasi_konseptual_hasil": "Pratinjau desain Galung dengan ilustrasi konseptual hasil AI dan draf konten Indonesia."
+  }
+}
