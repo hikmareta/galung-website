@@ -1721,6 +1721,21 @@ export interface SoftwareRelease {
   product: number | Product;
   version: string;
   channel: 'stable' | 'preview';
+  /**
+   * Select verified candidates for this release. Empty selects all verified assets; select explicitly to resolve duplicate builds. Sample copy — unreviewed.
+   */
+  assetsToPublish?: (number | ReleaseAsset)[] | null;
+  approvedAssets?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  lifecycle: 'draft' | 'active' | 'retired';
+  reviewedLocales?: ('id' | 'en')[] | null;
   publishedAt?: string | null;
   changelog?: string | null;
   updatedAt: string;
@@ -1728,7 +1743,7 @@ export interface SoftwareRelease {
   _status?: ('draft' | 'published') | null;
 }
 /**
- * Private metadata only. Installer uploads, supported architectures, verification and activation require Phase 06.
+ * Immutable installer records. Use Upload installer on a saved release draft. Verification runs separately.
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "releaseAssets".
@@ -1745,13 +1760,19 @@ export interface ReleaseAsset {
   filename?: string | null;
   sizeBytes?: number | null;
   sha256?: string | null;
-  uploadStatus: 'pending';
+  uploadStatus: 'pending' | 'uploaded' | 'verified' | 'failed' | 'aborted';
+  uploadId?: string | null;
+  uploadOwner?: number | null;
+  uploadExpiresAt?: string | null;
+  objectVersion?: string | null;
+  verifiedAt?: string | null;
+  failure?: string | null;
   visibility: 'private';
   updatedAt: string;
   createdAt: string;
 }
 /**
- * Restricted personal data. Public submission/delivery and retention policy are not enabled by this schema.
+ * Private website copies, retained for 30 days. Public REST create stays closed; the validated contact endpoint controls submission and SMTP delivery. Email-inbox retention is separate.
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "contactSubmissions".
@@ -1762,6 +1783,15 @@ export interface ContactSubmission {
   email: string;
   message: string;
   locale: 'id' | 'en';
+  submissionKey?: string | null;
+  requestFingerprint?: string | null;
+  privacyRevision?: string | null;
+  /**
+   * SMTP acceptance is not confirmation of inbox delivery. Unknown/pending messages are never automatically resent.
+   */
+  deliveryStatus: 'pending' | 'accepted' | 'failed' | 'unknown';
+  acceptedAt?: string | null;
+  auditPending?: boolean | null;
   status: 'new' | 'handled';
   updatedAt: string;
   createdAt: string;
@@ -3396,6 +3426,10 @@ export interface SoftwareReleasesSelect<T extends boolean = true> {
   product?: T;
   version?: T;
   channel?: T;
+  assetsToPublish?: T;
+  approvedAssets?: T;
+  lifecycle?: T;
+  reviewedLocales?: T;
   publishedAt?: T;
   changelog?: T;
   updatedAt?: T;
@@ -3415,6 +3449,12 @@ export interface ReleaseAssetsSelect<T extends boolean = true> {
   sizeBytes?: T;
   sha256?: T;
   uploadStatus?: T;
+  uploadId?: T;
+  uploadOwner?: T;
+  uploadExpiresAt?: T;
+  objectVersion?: T;
+  verifiedAt?: T;
+  failure?: T;
   visibility?: T;
   updatedAt?: T;
   createdAt?: T;
@@ -3428,6 +3468,12 @@ export interface ContactSubmissionsSelect<T extends boolean = true> {
   email?: T;
   message?: T;
   locale?: T;
+  submissionKey?: T;
+  requestFingerprint?: T;
+  privacyRevision?: T;
+  deliveryStatus?: T;
+  acceptedAt?: T;
+  auditPending?: T;
   status?: T;
   updatedAt?: T;
   createdAt?: T;

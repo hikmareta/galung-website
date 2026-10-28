@@ -42,7 +42,19 @@ jobs:
         env:
           TEST_POSTGRES_CONTAINER: ${{ job.services.postgres.id }}
       - run: pnpm test:integration
-      - run: pnpm audit --audit-level low
+      - run: pnpm audit:policy
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: dependency-audit
+          path: .tools/dependency-audit.json
+          include-hidden-files: true
       - run: pnpm build
       - run: pnpm exec playwright install --with-deps chromium
       - run: pnpm test:e2e
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: browser-quality-evidence
+          path: test-results/
+      - run: pnpm test:seo

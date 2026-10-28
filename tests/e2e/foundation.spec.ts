@@ -1,4 +1,6 @@
+import { publishedHomeFixture } from "../helpers/public-fixture";
 import { test, expect } from "@playwright/test";
+publishedHomeFixture();
 import { randomBytes } from "node:crypto";
 import { assertIsolatedDatabase } from "../helpers/isolated-database";
 assertIsolatedDatabase();
@@ -9,10 +11,14 @@ test("locale routes, redirect and unknown locale", async ({
   await page.goto("/");
   await expect(page).toHaveURL("/id");
   await expect(page.locator("html")).toHaveAttribute("lang", "id");
-  await expect(page.getByText("Contoh fondasi — belum ditinjau")).toBeVisible();
+  await expect(
+    page.getByRole("heading", { level: 1, name: "ID published fixture" }),
+  ).toBeVisible();
   await page.getByRole("link", { name: "English", exact: true }).click();
   await expect(page.locator("html")).toHaveAttribute("lang", "en");
-  await expect(page.getByText("Foundation sample — unreviewed")).toBeVisible();
+  await expect(
+    page.getByRole("heading", { level: 1, name: "EN published fixture" }),
+  ).toBeVisible();
   expect((await request.get("/fr")).status()).toBe(404);
 });
 test("empty-database bootstrap is closed and anonymous user APIs are denied", async ({
@@ -111,7 +117,7 @@ test("operator-created administrator can sign in and log out", async ({
     await page.goto("/admin/login");
     // Capture the empty form; never put credentials in a screenshot.
     await page.screenshot({
-      path: "documentation/screenshots/phase-03-admin-login.png",
+      path: "documentation/screenshots/phase-05-admin-login.png",
       fullPage: true,
     });
     await page.getByLabel("Email").fill(email);
@@ -131,7 +137,7 @@ test("operator-created administrator can sign in and log out", async ({
         /Nunito Sans/,
       );
       await page.screenshot({
-        path: `documentation/screenshots/phase-03-admin-${width}.png`,
+        path: `documentation/screenshots/phase-05-admin-${width}.png`,
         fullPage: true,
       });
     }
@@ -140,7 +146,7 @@ test("operator-created administrator can sign in and log out", async ({
       page.getByRole("heading", { name: "Users", exact: true }),
     ).toBeVisible();
     await page.screenshot({
-      path: "documentation/screenshots/phase-03-admin-users.png",
+      path: "documentation/screenshots/phase-05-admin-users.png",
       fullPage: true,
     });
     await page.goto(`/admin/collections/users/${admin.id}`);
@@ -148,7 +154,7 @@ test("operator-created administrator can sign in and log out", async ({
       "Browser test",
     );
     await page.screenshot({
-      path: "documentation/screenshots/phase-03-admin-edit.png",
+      path: "documentation/screenshots/phase-05-admin-edit.png",
       fullPage: true,
     });
     const cookie = (await page.context().cookies()).find(

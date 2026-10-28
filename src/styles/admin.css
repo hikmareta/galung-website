@@ -93,3 +93,8 @@ html[data-theme="light"] .nav {
   clip-path: inset(50%);
   white-space: nowrap;
 }
+
+/* Publication instructions must retain readable contrast in both CMS themes. */
+.galung-installer-candidates .field-description {
+  color: var(--theme-text);
+}

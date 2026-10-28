@@ -16,7 +16,7 @@ Source: `04-CMS-CONTENT-MODEL.md`. This map supplements the historical initial i
 | auditEvents | actor relation, immutable actorIdSnapshot/actorRoleSnapshot, action/resource/resourceId, timestamps | Restricted read; API create/update/delete denied. Historical unknown attribution explicitly labelled. |
 | softwareReleases | product/version/channel/publishedAt/localized changelog/drafts; `collections/OperationalModels.ts` | Private metadata foundation. Publication rejected until verified installer workflow in Phase 06. |
 | releaseAssets | release/OS/architecture/storageKey/filename/sizeBytes/sha256/uploadStatus/visibility | Private/pending only. No binary endpoint. Architecture remains TBD pending actual builds. |
-| contactSubmissions | name/email/message bounds/locale/status/timestamps | Admin-only records; API submission disabled until public contact validation, rate limiting, delivery and retention workflow. |
+| contactSubmissions | name/email/message bounds/locale/status/timestamps; Phase 05 submissionKey/requestFingerprint/privacyRevision/deliveryStatus/acceptedAt/auditPending | Private admin records; public REST create closed. Phase 05 validated endpoint uses durable receipts, approved ID/EN notices and 30-day maintenance. Real activation deferred; see PHASE-05-PUBLIC-PAGES.md. |
 | downloadEvents | release/asset/OS/timestamps | Private foundation; no recording endpoint or personal identifiers. |
 | siteSettings | displayName/description/email/logo/publicURL/socialLinks/localized SEO defaults/openGraphImage; `globals/editorial.ts` | Private versioned settings; approved public projection remains Phase 05. |
 | companyProfile | displayName/description/legalName/address/registrationIdentifiers/email/phone/logo/publicURL | Legal facts remain empty/TBD until supplied; audited super-admin writes. |
@@ -40,7 +40,7 @@ All 13 predefined blocks retain shared stable row IDs, enabled/style flags, cano
 | portfolioFeed | Category, bounded limit, featuredOnly |
 | newsFeed | Category and bounded limit |
 
-Feed population and final public video presentation remain Phase 05. The current shared preview/home renderer renders safe structured content and a video link/poster without third-party script execution. Rich text supports paragraphs, bold/italic, h3/h4, ordered/unordered lists; arbitrary HTML, scripts, custom nodes and uncontrolled CSS are rejected, including draft writes.
+Phase 05 adds published feed population and responsive image-side/grid controls; video presentation stays a safe link/poster without third-party script execution. Rich text supports paragraphs, bold/italic, h3/h4, ordered/unordered lists; arbitrary HTML, scripts, custom nodes and uncontrolled CSS are rejected, including draft writes.
 
 ## Current editorial procedure
 
@@ -54,3 +54,7 @@ Feed population and final public video presentation remain Phase 05. The current
 8. Media usage lists counts in current content and retained versions. Used media cannot be deleted or have approval withdrawn, including when referenced only by version history. Replace references deliberately; do not delete retained history simply to bypass the safeguard.
 
 Production storage/CDN invalidation, approved translations/assets/legal identity, retention policy, actual installer variants and deployment operations remain explicit later gates; schema availability does not activate these services.
+
+## Phase 06 schema supersession
+
+The release/asset inactive-workflow descriptions in this historical Phase 04 map are superseded by [the Phase 06 download runbook](PHASE-06-DOWNLOADS.md). Release collections remain private; the guarded upload/verification/publication workflow and public projections are now implemented. Other Phase 04 editorial contracts remain unchanged.

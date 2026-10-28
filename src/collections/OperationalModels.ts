@@ -1,6 +1,6 @@
 import { semanticVersion } from "../services/content/metadata-validation.ts";
-import type { CollectionConfig } from "payload";
-import { APIError } from "payload";
+import type { CollectionConfig, Where } from "payload";
+import { assetGuard, releaseGuard } from "../services/downloads/guards";
 import { adminOnly } from "../access/admin";
 import { auditChange, auditDelete } from "../hooks/editorial";
 const privateAccess = {
@@ -9,26 +9,26 @@ const privateAccess = {
   update: adminOnly,
   delete: adminOnly,
 };
-// Phase 04 defines the model only. Binary upload/verification/delivery remains Phase 06.
+// Private models; public downloads use verified projections.
 export const SoftwareReleases: CollectionConfig = {
   slug: "softwareReleases",
-  access: { ...privateAccess, readVersions: adminOnly },
+  access: { ...privateAccess, delete: () => false, readVersions: adminOnly },
   versions: { drafts: true },
   hooks: {
-    beforeChange: [
-      ({ data }) => {
-        if (data._status === "published")
-          throw new APIError(
-            "Release publication is disabled until the Phase 06 verification workflow exists",
-            400,
-          );
-        return data;
-      },
-    ],
+    beforeChange: [releaseGuard],
     afterChange: [auditChange],
     afterDelete: [auditDelete],
   },
   fields: [
+    {
+      name: "installerUpload",
+      type: "ui",
+      admin: {
+        components: {
+          Field: "/components/admin/installer-upload#InstallerUpload",
+        },
+      },
+    },
     {
       name: "product",
       type: "relationship",
@@ -49,18 +49,69 @@ export const SoftwareReleases: CollectionConfig = {
       defaultValue: "stable",
       required: true,
     },
-    { name: "publishedAt", type: "date", admin: { readOnly: true } },
+    {
+      name: "assetsToPublish",
+      type: "relationship",
+      relationTo: "releaseAssets",
+      hasMany: true,
+      maxRows: 200,
+      admin: {
+        className: "galung-installer-candidates",
+        description:
+          "Select verified candidates for this release. Empty selects all verified assets; select explicitly to resolve duplicate builds. Sample copy — unreviewed.",
+      },
+      filterOptions: ({ id }): Where => ({
+        and: [
+          { release: { equals: id || 0 } },
+          { uploadStatus: { equals: "verified" } },
+        ],
+      }),
+    },
+    {
+      name: "approvedAssets",
+      type: "json",
+      access: { create: () => false, update: () => false },
+      admin: { readOnly: true },
+    },
+    {
+      name: "lifecycle",
+      type: "select",
+      options: ["draft", "active", "retired"],
+      defaultValue: "draft",
+      required: true,
+    },
+    {
+      name: "reviewedLocales",
+      type: "select",
+      hasMany: true,
+      options: ["id", "en"],
+    },
+    {
+      name: "publishedAt",
+      type: "date",
+      access: { create: () => false, update: () => false },
+      admin: { readOnly: true },
+    },
     { name: "changelog", type: "textarea", localized: true },
   ],
 };
 export const ReleaseAssets: CollectionConfig = {
   slug: "releaseAssets",
-  access: privateAccess,
+  access: {
+    ...privateAccess,
+    create: () => false,
+    update: () => false,
+    delete: () => false,
+  },
   admin: {
     description:
-      "Private metadata only. Installer uploads, supported architectures, verification and activation require Phase 06.",
+      "Immutable installer records. Use Upload installer on a saved release draft. Verification runs separately.",
   },
-  hooks: { afterChange: [auditChange], afterDelete: [auditDelete] },
+  hooks: {
+    beforeChange: [assetGuard],
+    afterChange: [auditChange],
+    afterDelete: [auditDelete],
+  },
   fields: [
     {
       name: "release",
@@ -96,10 +147,16 @@ export const ReleaseAssets: CollectionConfig = {
     {
       name: "uploadStatus",
       type: "select",
-      options: ["pending"],
+      options: ["pending", "uploaded", "verified", "failed", "aborted"],
       defaultValue: "pending",
       required: true,
     },
+    { name: "uploadId", type: "text", admin: { hidden: true } },
+    { name: "uploadOwner", type: "number", admin: { readOnly: true } },
+    { name: "uploadExpiresAt", type: "date", admin: { readOnly: true } },
+    { name: "objectVersion", type: "text", admin: { readOnly: true } },
+    { name: "verifiedAt", type: "date", admin: { readOnly: true } },
+    { name: "failure", type: "text", admin: { readOnly: true } },
     {
       name: "visibility",
       type: "select",
@@ -112,20 +169,72 @@ export const ReleaseAssets: CollectionConfig = {
 export const ContactSubmissions: CollectionConfig = {
   slug: "contactSubmissions",
   access: {
-    read: adminOnly,
+    read: (args) =>
+      adminOnly(args)
+        ? {
+            createdAt: {
+              greater_than: new Date(Date.now() - 30 * 86400000).toISOString(),
+            },
+          }
+        : false,
     create: () => false,
     update: adminOnly,
     delete: adminOnly,
   },
   admin: {
     description:
-      "Restricted personal data. Public submission/delivery and retention policy are not enabled by this schema.",
+      "Private website copies, retained for 30 days. Public REST create stays closed; the validated contact endpoint controls submission and SMTP delivery. Email-inbox retention is separate.",
   },
   fields: [
     { name: "name", type: "text", required: true, maxLength: 120 },
     { name: "email", type: "email", required: true },
     { name: "message", type: "textarea", required: true, maxLength: 5000 },
     { name: "locale", type: "select", options: ["id", "en"], required: true },
+    {
+      name: "submissionKey",
+      type: "text",
+      unique: true,
+      access: { update: () => false },
+      admin: { readOnly: true },
+    },
+    {
+      name: "requestFingerprint",
+      type: "text",
+      access: { update: () => false },
+      admin: { readOnly: true },
+    },
+    {
+      name: "privacyRevision",
+      type: "text",
+      access: { update: () => false },
+      admin: { readOnly: true },
+    },
+    {
+      name: "deliveryStatus",
+      type: "select",
+      options: ["pending", "accepted", "failed", "unknown"],
+      required: true,
+      defaultValue: "unknown",
+      access: { update: () => false },
+      admin: {
+        readOnly: true,
+        description:
+          "SMTP acceptance is not confirmation of inbox delivery. Unknown/pending messages are never automatically resent.",
+      },
+    },
+    {
+      name: "acceptedAt",
+      type: "date",
+      access: { update: () => false },
+      admin: { readOnly: true },
+    },
+    {
+      name: "auditPending",
+      type: "checkbox",
+      defaultValue: false,
+      access: { update: () => false },
+      admin: { readOnly: true },
+    },
     {
       name: "status",
       type: "select",

@@ -4,7 +4,15 @@ import { useRef, useState } from "react";
 import type { Locale } from "@/lib/i18n/locales";
 import { designCopy } from "@/lib/i18n/design-copy";
 import { ButtonLink } from "@/components/ui/primitives";
-export function Header({ locale }: { locale: Locale }) {
+export function Header({
+  locale,
+  equivalents = { id: "/id", en: "/en" },
+  navigation,
+}: {
+  locale: Locale;
+  equivalents?: Partial<Record<Locale, string>>;
+  navigation?: { label: string; href: string }[];
+}) {
   const [open, setOpen] = useState(false);
   const triggerRef = useRef<HTMLButtonElement>(null);
   const copy = designCopy[locale];
@@ -40,12 +48,14 @@ export function Header({ locale }: { locale: Locale }) {
           className={`navigation ${open ? "is-open" : ""}`}
         >
           <nav aria-label={copy.menu}>
-            {copy.nav.map((label, index) => (
-              <Link
-                key={label}
-                href={`/${locale}#${["product", "features", "portfolio", "about", "news"][index]}`}
-                onClick={() => setOpen(false)}
-              >
+            {(navigation?.length
+              ? navigation
+              : copy.nav.map((label, index) => ({
+                  label,
+                  href: `/${locale}/${["software", "software/features", "portfolio", "about", "news"][index]}`,
+                }))
+            ).map(({ label, href }) => (
+              <Link key={label} href={href} onClick={() => setOpen(false)}>
                 {label}
               </Link>
             ))}
@@ -55,7 +65,8 @@ export function Header({ locale }: { locale: Locale }) {
             aria-label={locale === "id" ? "Bahasa" : "Language"}
           >
             <Link
-              href="/id"
+              href={equivalents.id || "/id"}
+              onClick={() => setOpen(false)}
               hrefLang="id"
               lang="id"
               aria-current={locale === "id" ? "page" : undefined}
@@ -63,7 +74,8 @@ export function Header({ locale }: { locale: Locale }) {
               Bahasa Indonesia
             </Link>
             <Link
-              href="/en"
+              href={equivalents.en || "/en"}
+              onClick={() => setOpen(false)}
               hrefLang="en"
               lang="en"
               aria-current={locale === "en" ? "page" : undefined}
@@ -72,7 +84,7 @@ export function Header({ locale }: { locale: Locale }) {
             </Link>
           </nav>
           <ButtonLink
-            href={`/${locale}#product`}
+            href={`/${locale}/download`}
             onClick={() => setOpen(false)}
           >
             {copy.cta}

@@ -7,8 +7,9 @@ export default defineConfig({
   workers: 1,
   use: { baseURL: origin },
   webServer: {
-    command: `pnpm start --port ${process.env.TEST_SERVER_PORT}`,
-    url: `${origin}/id`,
+    command: `"${process.execPath}" node_modules/next/dist/bin/next start --hostname 127.0.0.1 --port ${process.env.TEST_SERVER_PORT}`,
+    // A fresh test database intentionally has no published homepage (404).
+    url: `${origin}/robots.txt`,
     reuseExistingServer: false,
     timeout: 120000,
   },

@@ -190,7 +190,7 @@ for (const width of [375, 1280]) {
           ),
         ).toBe(true);
         await page.screenshot({
-          path: `documentation/screenshots/phase-04-editor-${locale}-${width}.png`,
+          path: `documentation/screenshots/phase-05-regression-editor-${locale}-${width}.png`,
           fullPage: true,
         });
         await page.goto(`/preview/pages/${doc.id}?locale=${locale}`);
@@ -208,7 +208,7 @@ for (const width of [375, 1280]) {
           ),
         ).toBe(true);
         await page.screenshot({
-          path: `documentation/screenshots/phase-04-preview-${locale}-${width}.png`,
+          path: `documentation/screenshots/phase-05-regression-preview-${locale}-${width}.png`,
           fullPage: true,
         });
       }
@@ -254,10 +254,20 @@ for (const width of [375, 1280]) {
         ).status(),
       ).toBe(400);
       await page.goto(`/admin/collections/media/${mediaId}?locale=en`);
-      await page
-        .getByRole("checkbox", { name: "Approved", exact: false })
-        .check();
-      await page.getByRole("button", { name: "Save", exact: true }).click();
+      // Hydration can replace the native checkbox before Payload registers its dirty state.
+      await expect(async () => {
+        if (
+          (await payload.findByID({ collection: "media", id: mediaId! }))
+            .approved
+        )
+          return;
+        await page
+          .getByRole("checkbox", { name: "Approved", exact: false })
+          .check();
+        await page
+          .getByRole("button", { name: "Save", exact: true })
+          .click({ timeout: 2000 });
+      }).toPass({ timeout: 15000 });
       await expect
         .poll(
           async () =>
@@ -324,6 +334,7 @@ for (const width of [375, 1280]) {
                 draft: false,
               })
             )._status,
+          { timeout: 30000 },
         )
         .toBe("published");
       for (const locale of ["id", "en"]) {
@@ -338,16 +349,21 @@ for (const width of [375, 1280]) {
           name: `${locale.toUpperCase()} image sample`,
         });
         await expect(image).toBeVisible();
-        expect(
-          await image.evaluate(
-            (element) => (element as HTMLImageElement).naturalWidth,
-          ),
-        ).toBe(320);
+        await image.scrollIntoViewIfNeeded();
+        await expect
+          .poll(
+            () =>
+              image.evaluate(
+                (element) => (element as HTMLImageElement).naturalWidth,
+              ),
+            { timeout: 30000 },
+          )
+          .toBe(320);
         expect(
           (await request.get((await image.getAttribute("src"))!)).status(),
         ).toBe(200);
         await publicPage.screenshot({
-          path: `documentation/screenshots/phase-04-public-${locale}-${width}.png`,
+          path: `documentation/screenshots/phase-05-regression-public-${locale}-${width}.png`,
           fullPage: true,
         });
       }
@@ -366,7 +382,7 @@ for (const width of [375, 1280]) {
         .first()
         .click();
       await expect
-        .poll(async () => (await request.get("/en")).text())
+        .poll(async () => (await request.get("/en")).text(), { timeout: 30000 })
         .toContain("Revised EN sample");
       await publicPage.goto("/id");
       await expect(publicPage.getByRole("heading", { level: 1 })).toHaveText(

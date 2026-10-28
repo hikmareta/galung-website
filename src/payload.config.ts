@@ -88,5 +88,10 @@ export default buildConfig({
     push: false,
     migrationDir: path.resolve(dirname, "migrations"),
   }),
-  typescript: { outputFile: path.resolve(dirname, "payload-types.ts") },
+  typescript: {
+    // Isolated runners start many Payload instances. Keep their background
+    // generators from racing over the shared source file; CI generates explicitly.
+    autoGenerate: !process.env.GALUNG_TEST_DATABASE,
+    outputFile: path.resolve(dirname, "payload-types.ts"),
+  },
 });

@@ -523,7 +523,12 @@ try {
       collection: "softwareReleases",
       user: admin,
       overrideAccess: false,
-      data: { product: product.id, version: "1.0.0-01", channel: "stable" },
+      data: {
+        product: product.id,
+        version: "1.0.0-01",
+        channel: "stable",
+        lifecycle: "draft",
+      },
     }),
     { status: 400 },
   );
@@ -557,7 +562,7 @@ try {
         uploadStatus: "pending",
       },
     }),
-    { status: 400 },
+    { status: 403 },
   );
   await assert.rejects(
     payload.create({
@@ -570,6 +575,7 @@ try {
         message: "Not a live form",
         locale: "id",
         status: "new",
+        deliveryStatus: "unknown",
       },
     }),
     { status: 403 },

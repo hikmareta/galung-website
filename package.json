@@ -17,23 +17,33 @@
     "format": "prettier --write src tests scripts playwright.config.ts *.mjs *.json *.yaml .github/workflows/*.yml",
     "format:check": "prettier --check src tests scripts playwright.config.ts *.mjs *.json *.yaml .github/workflows/*.yml",
     "test": "node --experimental-strip-types --test tests/unit/*.test.ts",
+    "audit:policy": "node --experimental-strip-types scripts/audit-policy.ts",
     "test:integration": "tsx scripts/run-tests.ts integration",
     "test:e2e": "tsx scripts/run-tests.ts e2e",
+    "test:seo": "tsx scripts/verify-seo.ts",
     "generate:types": "payload generate:types",
     "generate:importmap": "payload generate:importmap",
     "db:migrate": "payload migrate",
     "db:migrate:create": "payload migrate:create",
     "db:status": "payload migrate:status",
     "admin:create": "tsx --env-file=.env scripts/create-admin.ts",
-    "test:database": "tsx scripts/run-tests.ts database"
+    "test:database": "tsx scripts/run-tests.ts database",
+    "contact:retention": "tsx --env-file=.env scripts/contact-retention.ts",
+    "contact:worker": "tsx --env-file=.env scripts/contact-retention.ts --worker",
+    "contact:status": "tsx --env-file=.env scripts/contact-status.ts",
+    "contact:smtp:verify": "tsx --env-file=.env scripts/contact-smtp-verify.ts",
+    "downloads:verify": "tsx --env-file=.env scripts/verify-installers.ts"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "3.1157.0",
+    "@aws-sdk/s3-request-presigner": "3.1157.0",
     "@payloadcms/db-postgres": "3.92.0",
     "@payloadcms/next": "3.92.0",
     "@payloadcms/richtext-lexical": "3.92.0",
     "@payloadcms/ui": "3.92.0",
     "graphql": "16.8.1",
     "next": "16.4.3",
+    "nodemailer": "10.2.1",
     "payload": "3.92.0",
     "react": "19.2.6",
     "react-dom": "19.2.6"
@@ -45,11 +55,14 @@
     "@playwright/test": "1.64.1",
     "@tailwindcss/postcss": "4.3.3",
     "@types/node": "24.19.2",
+    "@types/nodemailer": "8.0.2",
     "@types/pg": "8.23.1",
     "@types/react": "19.2.14",
     "@types/react-dom": "19.2.3",
+    "axe-core": "4.14.0",
     "eslint": "10.13.0",
     "eslint-plugin-react-hooks": "7.1.1",
+    "lighthouse": "13.6.0",
     "pg": "8.23.1",
     "prettier": "3.9.10",
     "tailwindcss": "4.3.3",
@@ -70,7 +83,8 @@
       "@lexical/headless>happy-dom": "21.0.4"
     },
     "patchedDependencies": {
-      "@payloadcms/db-postgres@3.92.0": "patches/@payloadcms__db-postgres@3.92.0.patch"
+      "@payloadcms/db-postgres@3.92.0": "patches/@payloadcms__db-postgres@3.92.0.patch",
+      "deepmerge@4.3.1": "patches/deepmerge@4.3.1.patch"
     }
   }
 }

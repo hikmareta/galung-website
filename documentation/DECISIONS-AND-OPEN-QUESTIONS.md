@@ -1,5 +1,43 @@
 # Decision Register
 
+## Phase 08 preparation activated — 28 October 2026
+
+**Subsequent user decision:** web hosting will use Vercel; database will use
+Supabase. This supersedes the initial provider-TBD/recommended-VM proposal below.
+PHASE-08-VERCEL-SUPABASE.md records costs, minimal local vercel.json and required
+media, pooling/API-exposure, worker and versioned-installer compatibility work.
+No plan purchase, region, storage provider, worker host, budget, credentials or
+staging/production deployment approval is inferred. Supabase is PostgreSQL only;
+Payload retains CMS authentication/access. Supabase Storage's missing S3 versioning
+precludes using it with the existing installer adapter without a separate approved
+design change. No deployment occurred.
+
+User explicitly requested hosting/runtime/TCO comparison, approval-gated staging
+and production setup, operations/editor handover and phase evaluation. Earlier
+no-automatic-Phase-08 statements are superseded for this preparation scope only.
+No provider, region, budget, credentials or deployment approval was supplied.
+PHASE-08-HOSTING.md recommends a portable paid Node host conditionally, compares
+Render and Vercel Pro, and distinguishes published prices from cost assumptions.
+This is a recommendation, not an approved provider or purchase.
+
+PHASE-08-RUNBOOK.md specifies environment isolation, durable current media storage,
+DNS/TLS, private DB roles, jobs, real versioned installer gates, redacted monitoring,
+paired backup/restore and safe schema-aware rollback. Proposed RPO/RTO, schedules,
+retention and alert thresholds need owner approval. EDITOR-HANDBOOK.md describes
+implemented roles and bilingual shared-layout publishing without inventing copy.
+Named operators, MFA/recovery/CSP/ingress work, live storage/build verification,
+Contact activation and legal/content/translation approvals remain unresolved.
+Phase 08 stays PARTIAL until real staging smoke, rollback/access/backup evidence
+and separately approved production handover exist. No new commercial features.
+
+## Fresh Phase 06 review — 28 October 2026
+
+User requested evaluation of the completed phase. PHASE-06-REVIEW.md supersedes the historical local PASS with PARTIAL based on reproduced upload recovery/duplicate-publication and native file-selection issues, plus the current LOW Payload/deepmerge dependency advisory. Ordinary local transport, permissions, checksum/localization/lifecycle checks pass. This records review evidence, not new business requirements, application fixes, provider/build approval, Contact activation or later-phase authorization. Existing live storage/signing/architecture/content decisions remain TBD. Recommended next scope is Phase 06 remediation and reevaluation.
+
+## Phase 06 activation — 27 October 2026
+
+User explicitly authorized the download system and phase evaluation. Implementation uses a private versioned S3-compatible bucket, short-lived scoped multipart parts, a separate CLI whole-file SHA-256/format verifier, immutable asset records and explicit ID/EN release approval snapshots. Only Super Admin manages releases; anonymous visitors download approved stable builds without login. Active publication requires both Windows and macOS builds; actual architectures must be explicitly configured from approved builds and remain TBD. Versioning is an adapter prerequisite, not a hosting-provider selection. New interface labels are identified as unreviewed samples. Provider/IAM/CORS/lifecycle, signing/notarization, real installation and production content verification remain distinct launch gates. See PHASE-06-DOWNLOADS.md and PHASE-06-EVALUATION.md; no later phase, commercial functionality, Contact activation or deployment is authorized automatically.
+
 ## Confirmed 2026-10-24
 - Brand: Galung, owned by company whose identity is not yet specified.
 - Domain: `galung.id`.
@@ -18,11 +56,13 @@
 | Production logo and source brand files | TBD | Visual production sign-off |
 | Permission to publish photos and claims from screenshot | TBD | Publishing real content |
 | Actual installer OS architectures + signing | TBD | Release testing/public launch |
+| Versioned installer bucket, provider IAM/CORS/lifecycle and worker operations | TBD; adapter prerequisites in PHASE-06-DOWNLOADS.md | Real Phase 06 upload/download activation |
 | Product requirements and minimum supported OS | TBD | Final download content |
 | Legal company name/address | TBD; CMS editable | Public legal/company statements |
-| Contact destination/email | TBD | Working contact form launch |
+| Contact destination/email | admin@galung.id approved 27 October; delivery configuration TBD | Working contact form launch |
+| Contact retention | Website copy: 30 days approved; inbox retention TBD; deletion workflow pending | Working contact form launch |
 | Final privacy/terms policies | TBD | Public launch |
-| Production provider and ToS | TBD | Deployment |
+| Production provider and ToS | Vercel web + Supabase DB selected 28 October; plans/terms/budget/region/credentials remain TBD | Deployment |
 | Admin role assignments and content approver | TBD | CMS release |
 | Whether language detection redirect is desired | Proposed | Routing sign-off |
 
@@ -86,3 +126,40 @@ User requested an independent evaluation of the completed phase. PHASE-04-REVIEW
 User explicitly requested complete fixes and closure. PHASE-04-CLOSURE.md supersedes the historical PARTIAL review with local PASS and closes R1–R5 after executed regression/browser/migration checks. Files are immutable for every CMS role: replacements use new Media records to preserve current and historical references; approved metadata requires publisher/admin and both alt locales. Publication validates all referenced images in both locales. Exact usage includes retained versions; referenced media cannot be deleted or unapproved. Minimal immutable audit ID/role snapshots survive staff deletion; unknown historical roles are labelled, not inferred.
 
 Schema additions fulfil doc 04, including specialized restricted rich text/blocks and private release/asset/contact/download models. These schemas do not activate later workflows. Dates do not imply automatic scheduled publication; build architectures and production storage remain TBD. Public reads use an anonymous-only cache with tag/path invalidation verified after HTTP publication; maintenance CLI writes require explicit refresh/restart. Matching pinned Lexical dependency and a verified scoped happy-dom security override update the lockfile. Current schema/procedure: PHASE-04-SCHEMA-MAP.md. No production content/translation, legal identity, hosting choice, future commercial features or Phase 05 activation is approved by this closure.
+
+## Phase 05 activation — 27 October 2026
+User explicitly authorized public bilingual pages and phase evaluation. Fixed page keys, localized detail slugs, published-only anonymous reads, limited published-global projections and opt-in indexing are documented in PHASE-05-PUBLIC-PAGES.md. No production translation/content/legal or hosting approval is inferred. Contact delivery/retention remain TBD; public submission stays disabled. No Basic/Pro, pricing, payments, account portal, installer delivery or Phase 06 activation.
+
+### Contact direction — 27 October 2026
+User selected email delivery and described retention as “estimated daily.” No recipient address or approved privacy notice was supplied. Retention remains ambiguous: clarification requested whether daily means deleting stored submissions after 24 hours. Do not infer a deletion policy or activate submissions until clarified/configured. This does not approve policy text or external test messages.
+
+### Contact clarification — 27 October 2026
+User supplied admin@galung.id, selected 30-day retention for the website copy and requested an Indonesian privacy-notice draft. This supersedes the earlier ambiguous “estimated daily” note. CONTACT-PRIVACY-DRAFT.id.md is unapproved draft copy, not published legal policy. Email-inbox retention/provider details remain TBD. Per the selected option, keep the form disabled until ready; no live email or public submission was activated.
+
+### Contact notice approval and SMTP details — 27 October 2026
+User explicitly approved the Indonesian draft notice and authorized enabling the Contact form. This supersedes its earlier unapproved status; it does not approve an English translation or invent company legal identity. Approved recipient/website retention remain admin@galung.id / 30 days. User identified DomaiNesia SMTP Hosting and supplied mx3.mailspace.id, port 465. Local configuration uses TLS and the admin@galung.id mailbox. Passwords remain in ignored local configuration and are never printed in chat or committed. Activation still requires successful authentication, passing form checks, a published ID Contact page and a healthy retention process.
+
+### Mailbox clarification and fresh Phase 05 review — 27 October 2026
+The user clarified that the intended email account had not yet been registered with the provider. This is the current external Contact activation blocker, not evidence of a newly successful login. Existing ID notice approval and 30-day website retention remain approved; no EN notice, legal identity or new commercial scope is inferred. PHASE-05-REVIEW.md records a fresh PARTIAL review: normal regression checks pass, formatting fails, and two adversarial code defects are reproduced. Only review tests/dispatch and documentation were added; no production fix, Contact activation, real SMTP retry or later-phase activation is authorized by this review.
+
+## Phase 05 remediation authorized — 27 October 2026
+User requested complete remediation and closure of Phase 05 implementation. While work proceeds, the user explicitly selected finishing code/tests first because the mailbox is not yet registered; live Contact activation remains deferred to that external setup. The user approved the proposed EN near-form privacy notice on the same date. ID and EN notices are now approved; this does not approve a full legal policy/company identity or production deployment. No real SMTP login retry or email sending is authorized by this code-first choice.
+
+Remediation uses published document identity for localized CMS navigation, durable per-submission receipts and privacy-revision attribution, independent audit reconciliation, explicit token/delivery error UI and functional CMS image/grid controls. Technical closure must be supported by actual regression/migration/browser evidence. Operational mailbox/SMTP/worker setup remains separately reported; no automatic Phase 06 activation.
+
+### Phase 05 implementation closure evidence — 27 October 2026
+
+PHASE-05-CLOSURE.md supersedes the historical defect review for local implementation: R1–R5 remediated, 20 unit/complete integration/31 browser tests and indexed HTTP SEO checks pass; five-migration rollback/reapply/restore verified and working local migration applied after backup. Both approved policy revisions are attached to private delivery receipts. Audit repair never resends mail; ambiguous SMTP outcomes remain unknown. The user-deferred live-activation blocker remains: mailbox unregistered, Contact disabled/ready=false. No real auth retry/email or production publication was performed. This records technical evidence, not new business approvals or automatic Phase 06 activation.
+
+
+## Phase 06 remediation authorization and evidence — 28 October 2026
+
+User requested complete remediation of open findings. Implementation preserves owner-scoped sessions on busy/uncertain completion, reconciles uploaded/verified state without another upload and clears native selection. Optional versioned assetsToPublish selection repairs duplicate verified variants; immutable assets and approvedAssets publication snapshots remain protected. Selected candidates must belong to the release and pass both-OS/unique-variant/verification and ID/EN readiness guards.
+
+No upstream fixed deepmerge version was available; a pinned three-entrypoint patch with runtime/Payload regressions and a fail-closed full-registry audit policy provides a disclosed local mitigation. Raw audit still reports one LOW advisory; do not claim an upstream fix or a clean raw audit. PHASE-06-CLOSURE.md records local PASS with actual 30-unit/full-integration/33-browser plus two final download regressions/eight-migration restore/SEO evidence and the backed-up working DB migration. This is engineering remediation, not new product/legal/provider approval. Live provider/build/content gates remain PARTIAL, Contact remains deferred and Phase 07/deployment is not automatically authorized.
+
+## Phase 07 activation — 28 October 2026
+
+User explicitly authorized quality/security hardening, defect repairs and the phase evaluation. See PHASE-07-EVALUATION.md for measured results and remaining controls. The header CTA is corrected to localized Download per doc 03. Pinned dev-only axe-core and retained browser audit/performance evidence extend QA. No new hosting/provider/MFA identity, legal facts, translations, real email sending, Phase 08 or future commercial features are approved by this request.
+
+Phase 07 verification adds pinned Lighthouse 13.6.0 (registry engine checked) alongside axe-core 4.14.0. Mobile lab samples and limitations are retained in PHASE-07-MEASUREMENTS.json. Test runners use the executing Node binary, nested SEO uses the repository cwd, and isolated Payload instances skip background type generation while CI generates explicitly. Production security/quality gates remain open as enumerated in the Phase 07 evaluation.

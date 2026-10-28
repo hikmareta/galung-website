@@ -10,10 +10,10 @@
 | `portfolioProjects` | localized title, description, case study, gallery, categories, featured | Draft/publish |
 | `portfolioCategories` | localized label, stable key | Lookup |
 | `products` | stable key `galung`, localized overview/features/media | One active product for MVP |
-| `softwareReleases` | product, semantic version, channel, publishedAt, localized changelog, status | Approved version metadata |
-| `releaseAssets` | release, OS, arch, storageKey, filename, sizeBytes, sha256, uploadStatus, visibility | Private pending then verified public |
+| `softwareReleases` | product, semantic version, channel, publishedAt, localized changelog, draft/published status, lifecycle, reviewedLocales, assetsToPublish candidate selection, approvedAssets snapshot | Admin-only; active publication requires verified Windows/macOS and reviewed ID/EN notes; retired records retained |
+| `releaseAssets` | release, OS, architecture, storageKey, filename, sizeBytes, sha256, uploadStatus, visibility, uploadId/owner/expiry, objectVersion, verifiedAt, failure | Immutable private metadata; workflow-only writes, direct multipart upload, independent verification, version-pinned public redirects. See PHASE-06-DOWNLOADS.md |
 | `media` | object key, MIME, dimensions, alt (localized), caption, attribution | Usage tracking as feasible |
-| `contactSubmissions` | name, email, message, locale, timestamp, status | Restricted personal data, retention policy |
+| `contactSubmissions` | name, email, message, locale, timestamp, handling status; unique submissionKey, requestFingerprint, privacyRevision, deliveryStatus, acceptedAt, auditPending | Restricted personal data; 30-day website retention; server-controlled delivery receipts and policy attribution. SMTP acceptance is not inbox delivery. See PHASE-05-PUBLIC-PAGES.md. |
 | `downloadEvents` | release/asset, date/time, coarse analytics metadata | Privacy-conscious aggregate metrics |
 | `auditEvents` | actor, action, resource, timestamp | Privileged event trail |
 

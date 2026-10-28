@@ -1,3 +1,4 @@
+import { startInstallerStorage } from "../tests/helpers/installer-storage";
 import { rm } from "node:fs/promises";
 import path from "node:path";
 import { Client } from "pg";
@@ -7,6 +8,7 @@ import { createServer } from "node:net";
 import { loadEnvFile } from "node:process";
 import { existsSync } from "node:fs";
 import assert from "node:assert/strict";
+import { startSMTP } from "../tests/helpers/smtp";
 
 if (existsSync(".env")) loadEnvFile(".env");
 const kind = process.argv[2];
@@ -38,6 +40,9 @@ adminURL.pathname = "/postgres";
 const admin = new Client({ connectionString: adminURL.href });
 await admin.connect();
 let created = false;
+let installerSink:
+  Awaited<ReturnType<typeof startInstallerStorage>> | undefined;
+let smtpSink: Awaited<ReturnType<typeof startSMTP>> | undefined;
 const isolated = new URL(base);
 isolated.pathname = `/${name}`;
 const env = {
@@ -152,7 +157,13 @@ try {
   const payload = ["--import", "tsx", "node_modules/payload/bin.js"];
   await run([...payload, "migrate"]);
   if (kind === "integration") {
-    if (process.argv[3] === "phase04-review") {
+    if (process.argv[3] === "downloads") {
+      await run(["--import", "tsx", "tests/integration/downloads.ts"]);
+    } else if (process.argv[3] === "phase05-review") {
+      await run(["--import", "tsx", "tests/integration/phase05-review.ts"]);
+    } else if (process.argv[3] === "contact") {
+      await run(["--import", "tsx", "tests/integration/contact.ts"]);
+    } else if (process.argv[3] === "phase04-review") {
       await run(["--import", "tsx", "tests/integration/phase04-review.ts"]);
     } else {
       if (process.argv[3] !== "editorial") {
@@ -161,9 +172,35 @@ try {
       }
       await run(["--import", "tsx", "tests/integration/editorial.ts"]);
       await run(["--import", "tsx", "tests/integration/phase04-review.ts"]);
+      await run(["--import", "tsx", "tests/integration/contact.ts"]);
+      await run(["--import", "tsx", "tests/integration/phase05-review.ts"]);
+      await run(["--import", "tsx", "tests/integration/downloads.ts"]);
     }
   }
   if (kind === "e2e") {
+    const capture = path.join(testMedia, "smtp-capture.json");
+    smtpSink = await startSMTP(capture);
+    installerSink = await startInstallerStorage();
+    Object.assign(env, {
+      DOWNLOAD_S3_ENDPOINT: installerSink.endpoint,
+      DOWNLOAD_S3_BUCKET: "fixture-installers",
+      DOWNLOAD_S3_ACCESS_KEY: "fixture-only",
+      DOWNLOAD_S3_SECRET_KEY: "fixture-secret-only",
+      DOWNLOAD_ARCHITECTURES: "windows:fixture,macos:fixture",
+      CONTACT_ENABLED: "true",
+      CONTACT_SMTP_HOST: "127.0.0.1",
+      CONTACT_SMTP_PORT: String(smtpSink.port),
+      CONTACT_SMTP_SECURITY: "tls",
+      CONTACT_SMTP_USER: "local-test-only",
+      CONTACT_SMTP_PASSWORD: "local-test-only",
+      CONTACT_SMTP_FROM: "sender@example.invalid",
+      CONTACT_TRUSTED_IP_HEADER: "",
+      CONTACT_MAINTENANCE_SECRET: randomBytes(32).toString("hex"),
+      SMTP_CAPTURE_FILE: capture,
+      NODE_EXTRA_CA_CERTS: path.resolve(
+        "tests/fixtures/smtp-localhost.test-cert.crt",
+      ),
+    });
     const server = createServer();
     const port = await new Promise<number>((resolve, reject) => {
       server.on("error", reject);
@@ -203,6 +240,8 @@ try {
     await backupRehearsal();
   }
 } finally {
+  await smtpSink?.close();
+  await installerSink?.close();
   if (created) {
     // Only this runner-created, random database is isolated and removed.
     await admin.query(`ALTER DATABASE "${name}" WITH ALLOW_CONNECTIONS false`);

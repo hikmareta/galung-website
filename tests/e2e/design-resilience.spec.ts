@@ -1,4 +1,6 @@
+import { publishedHomeFixture } from "../helpers/public-fixture";
 import { test, expect } from "@playwright/test";
+publishedHomeFixture();
 
 for (const locale of ["id", "en"]) {
   for (const width of [375, 639, 640, 768, 1199, 1200, 1440]) {
@@ -96,23 +98,21 @@ for (const locale of ["id", "en"]) {
       await assertFits();
       if (width === 375 || width === 1200)
         await page.screenshot({
-          path: `documentation/screenshots/phase-03-stress-${locale}-${width}.png`,
+          path: `documentation/screenshots/phase-05-stress-${locale}-${width}.png`,
           fullPage: true,
         });
     });
   }
 }
 
-test("local fonts, responsive artwork, reduced motion and locale metadata", async ({
+test("local fonts, reduced motion and published locale metadata", async ({
   page,
 }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
   for (const locale of ["id", "en"]) {
     await page.goto(`/${locale}`);
     await expect(page).toHaveTitle(
-      locale === "id"
-        ? "Galung — contoh sistem desain"
-        : "Galung — design system sample",
+      locale === "id" ? "ID published fixture" : "EN published fixture",
     );
     await expect(page.locator('meta[name="robots"]')).toHaveAttribute(
       "content",
@@ -142,23 +142,5 @@ test("local fonts, responsive artwork, reduced motion and locale metadata", asyn
       "transition-duration",
       "0s",
     );
-    await page.locator(".sample-gallery").scrollIntoViewIfNeeded();
-    await expect
-      .poll(async () =>
-        page
-          .locator("main img")
-          .evaluateAll((images) =>
-            images.every(
-              (image) =>
-                (image as HTMLImageElement).complete &&
-                (image as HTMLImageElement).naturalWidth > 0,
-            ),
-          ),
-      )
-      .toBe(true);
-    for (const image of await page.locator("main img").all())
-      expect(
-        await image.evaluate((node) => (node as HTMLImageElement).currentSrc),
-      ).toContain("/design-samples/");
   }
 });

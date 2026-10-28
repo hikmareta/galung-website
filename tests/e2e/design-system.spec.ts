@@ -1,4 +1,6 @@
+import { publishedHomeFixture } from "../helpers/public-fixture";
 import { test, expect } from "@playwright/test";
+publishedHomeFixture();
 for (const width of [375, 768, 1440]) {
   for (const locale of ["id", "en"]) {
     test(`design sample ${locale} at ${width}`, async ({ page }) => {
@@ -24,7 +26,7 @@ for (const width of [375, 768, 1440]) {
         await page.keyboard.press("Enter");
         await expect(button).toHaveAttribute("aria-expanded", "true");
         await page.screenshot({
-          path: `documentation/screenshots/phase-03-menu-${locale}-${width}.png`,
+          path: `documentation/screenshots/phase-05-menu-${locale}-${width}.png`,
           fullPage: true,
         });
         await page.keyboard.press("Tab");
@@ -38,7 +40,7 @@ for (const width of [375, 768, 1440]) {
         ).toBeHidden();
       }
       await page.screenshot({
-        path: `documentation/screenshots/phase-03-${locale}-${width}.png`,
+        path: `documentation/screenshots/phase-05-${locale}-${width}.png`,
         fullPage: true,
       });
     });

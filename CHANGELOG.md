@@ -1,5 +1,33 @@
 # Changelog
 
+## 2026-10-28 — Phase 08 preparation and handover
+
+- Compare paid hosting/runtime/TCO with primary sources and explicit assumptions.
+  Record the user's Vercel web/Supabase PostgreSQL selection; plans and purchases
+  are not approved by provider selection.
+- Add a minimal local vercel.json and selected-provider readiness checklist.
+  Document media persistence, Supabase API exposure/pooling, separate versioned
+  installer storage and worker compatibility gates before staging.
+- Add deployment/DNS/TLS, migration/backup/rollback, monitoring/launch runbook and
+  editor handbook; report actual checks and PARTIAL evaluation. No infrastructure
+  provisioned, secrets changed, live email sent or site deployed. Preserve existing
+  Phase 07 launch findings and unrelated dirty changes.
+
+## 2026-10-28 — Phase 07 quality and security hardening
+
+- Corrected the localized header CTA to the public Download route.
+- Added pinned axe-core/Lighthouse ID/EN mobile audits, security-header/CTA regression checks and saved local performance evidence; retain browser results in CI. Fixed direct-Node/nested-directory test startup, isolated background generation and asynchronous editorial assertions.
+- Documented actual checks, coverage, failures and deferred risks in documentation/PHASE-07-EVALUATION.md. Production MFA/recovery, CSP/ingress controls, real provider/build/SMTP and manual/field quality gates remain explicit; no future commercial scope or deployment.
+
+## 2026-10-28 — Phase 06 download remediation
+
+- Recovered busy/uncertain multipart completion through owner-scoped status checks, retained part progress and idempotent completion; cleared native file selection with client state after success.
+- Added Super Admin release candidate selection to repair duplicate verified variants without deleting immutable assets/history. Publication still requires verified Windows/macOS and reviewed ID/EN notes; anonymous delivery uses only snapshotted IDs and direct storage redirects.
+- Added a reversible candidate-relationship migration; eight-migration rollback/reapply/restore passed and the working local database was migrated after private backup.
+- Mitigated the LOW deepmerge advisory with a pinned three-entrypoint patch, runtime/Payload compatibility regressions and a fail-closed CI audit policy retaining raw advisory evidence. Raw registry audit still reports the known version; no upstream fix or clean raw audit is claimed.
+- Converted the historical defect probe to positive recovery assertions and fixed fixture teardown discovered by the full browser suite. Improved candidate-instruction contrast with a scoped theme-aware rule. Actual commands, failures/reruns, acceptance matrix and final UI checks are recorded in documentation/PHASE-06-CLOSURE.md.
+- Production provider/IAM/worker, approved architecture/signed builds/real OS installs and content/legal/hosting gates remain separate. No Phase 07, deployment, future commercial scope, commit or push is performed.
+
 ## 2026-10-26 — Phase 04 remediation and closure
 
 - Closed P04-R1–R5: deny file replacement before file effects, preserve original hashes, require approved bilingual media before publication, protect exact current/version references and retain immutable audit actor snapshots after staff deletion.

@@ -1,0 +1,152 @@
+[
+  {
+    "locale": "id",
+    "lighthouseVersion": "13.6.0",
+    "fetchTime": "2026-10-28T14:44:53.794Z",
+    "performance": 0.92,
+    "accessibility": 1,
+    "bestPractices": 1,
+    "lcpMilliseconds": 793.1769999999999,
+    "cls": 0,
+    "totalBlockingTimeMilliseconds": 357,
+    "transferBytes": 213774,
+    "limitations": "Synthetic published homepage fixture, mobile simulated throttling, loopback, one run per locale; not production content or real-user p75/INP",
+    "opportunities": [
+      {
+        "id": "total-blocking-time",
+        "title": "Total Blocking Time",
+        "displayValue": "360 ms",
+        "score": 0.72
+      },
+      {
+        "id": "max-potential-fid",
+        "title": "Max Potential First Input Delay",
+        "displayValue": "310 ms",
+        "score": 0.34
+      },
+      {
+        "id": "interactive",
+        "title": "Time to Interactive",
+        "displayValue": "2.4 s",
+        "score": 0.98
+      },
+      {
+        "id": "redirects",
+        "title": "Avoid multiple page redirects",
+        "displayValue": "Est savings of 620 ms",
+        "score": 0
+      },
+      {
+        "id": "mainthread-work-breakdown",
+        "title": "Minimize main-thread work",
+        "displayValue": "2.2 s",
+        "score": 0
+      },
+      {
+        "id": "bootup-time",
+        "title": "Reduce JavaScript execution time",
+        "displayValue": "1.3 s",
+        "score": 0
+      },
+      {
+        "id": "unused-javascript",
+        "title": "Reduce unused JavaScript",
+        "displayValue": "Est savings of 51 KiB",
+        "score": 0.5
+      },
+      {
+        "id": "document-latency-insight",
+        "title": "Document request latency",
+        "displayValue": "Est savings of 560 ms",
+        "score": 0
+      },
+      {
+        "id": "legacy-javascript-insight",
+        "title": "Legacy JavaScript",
+        "displayValue": "Est savings of 12 KiB",
+        "score": 0.5
+      },
+      {
+        "id": "network-dependency-tree-insight",
+        "title": "Network dependency tree",
+        "displayValue": null,
+        "score": 0
+      },
+      {
+        "id": "render-blocking-insight",
+        "title": "Render-blocking requests",
+        "displayValue": "Est savings of 140 ms",
+        "score": 0
+      }
+    ]
+  },
+  {
+    "locale": "en",
+    "lighthouseVersion": "13.6.0",
+    "fetchTime": "2026-10-28T14:45:10.223Z",
+    "performance": 0.93,
+    "accessibility": 1,
+    "bestPractices": 1,
+    "lcpMilliseconds": 779.9269999999999,
+    "cls": 0,
+    "totalBlockingTimeMilliseconds": 318.53649999999993,
+    "transferBytes": 213066,
+    "limitations": "Synthetic published homepage fixture, mobile simulated throttling, loopback, one run per locale; not production content or real-user p75/INP",
+    "opportunities": [
+      {
+        "id": "total-blocking-time",
+        "title": "Total Blocking Time",
+        "displayValue": "320 ms",
+        "score": 0.76
+      },
+      {
+        "id": "max-potential-fid",
+        "title": "Max Potential First Input Delay",
+        "displayValue": "320 ms",
+        "score": 0.32
+      },
+      {
+        "id": "interactive",
+        "title": "Time to Interactive",
+        "displayValue": "2.4 s",
+        "score": 0.98
+      },
+      {
+        "id": "redirects",
+        "title": "Avoid multiple page redirects",
+        "displayValue": "Est savings of 610 ms",
+        "score": 0
+      },
+      {
+        "id": "unused-javascript",
+        "title": "Reduce unused JavaScript",
+        "displayValue": "Est savings of 51 KiB",
+        "score": 0.5
+      },
+      {
+        "id": "document-latency-insight",
+        "title": "Document request latency",
+        "displayValue": "Est savings of 280 ms",
+        "score": 0
+      },
+      {
+        "id": "legacy-javascript-insight",
+        "title": "Legacy JavaScript",
+        "displayValue": "Est savings of 12 KiB",
+        "score": 0.5
+      },
+      {
+        "id": "network-dependency-tree-insight",
+        "title": "Network dependency tree",
+        "displayValue": null,
+        "score": 0
+      },
+      {
+        "id": "render-blocking-insight",
+        "title": "Render-blocking requests",
+        "displayValue": "Est savings of 140 ms",
+        "score": 0
+      }
+    ]
+  }
+]
